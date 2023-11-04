@@ -1,5 +1,9 @@
 package Account
 
+import (
+	db "backend/DBConnection"
+)
+
 type User struct {
 	ID       int
 	Name     string
@@ -18,6 +22,11 @@ type CreateAccountResponse struct {
 	Message string
 }
 
-func create() CreateAccountResponse {
-	
+func Create() CreateAccountResponse {
+	db, err := db.GetDatabaseConnection()
+	if err != nil {
+		panic(err.Error())
+	}
+	defer db.Close()
+	return CreateAccountResponse{}
 }
