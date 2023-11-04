@@ -1,10 +1,10 @@
-FROM golang:1.19-alpine
+FROM golang:1.21
 WORKDIR /app
 COPY go.mod .
-COPY go.sum .
+#COPY go.sum .
 RUN go mod download
 RUN go mod tidy
 # COPY *.go .
 COPY . .
-EXPOSE 50051
+EXPOSE 8080
 ENTRYPOINT [ "go", "run", "cmd/main.go" ]

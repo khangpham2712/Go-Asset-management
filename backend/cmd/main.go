@@ -8,11 +8,11 @@ import (
 
 var (
 	ServiceName = "golang-docker-demo"
-	port        = "50051"
+	port        = "8080"
 )
 
 func main() {
-	http.HandleFunc("/ping", func(w http.ResponseWriter, req *http.Request) {
+	http.HandleFunc("/account/create", func(w http.ResponseWriter, req *http.Request) {
 		w.Write([]byte(fmt.Sprintf("ping ok %s", ServiceName)))
 	})
 	fmt.Println("start service with port: ", port)

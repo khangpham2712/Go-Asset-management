@@ -5,7 +5,7 @@ services:
     build: .
     container_name: backend-app
     ports:
-      - 50051:50051
+      - 8080:8080
 
   db:
     image: mysql
