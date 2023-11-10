@@ -5,6 +5,7 @@ import { DatePicker } from 'antd';
 import { Routes, Route } from 'react-router-dom'
 import ViewAssest from './page/ViewAssest';
 import Login from './page/Login';
+import AssestDetail from './page/AssetDetail/AssetDetail';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
     <Routes>
       <Route path='/' element={<Login />} />
       <Route path='/viewassest' element={<ViewAssest />} />
+      <Route path='/assest-detail' element={<AssestDetail />} />
     </Routes>
     </div>
   );
