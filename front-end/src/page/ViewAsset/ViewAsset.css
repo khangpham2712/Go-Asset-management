@@ -1,0 +1,14 @@
+.Viewasset--header {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.Viewasset--select {
+  margin-right: 10px;
+}
+
+.Viewasset--button {
+  margin-right: 10px;
+}

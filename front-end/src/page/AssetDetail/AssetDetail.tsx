@@ -14,7 +14,7 @@ const AssestDetail = (assestID: any) => {
   // useEffect(() => {
   //   loadData();
   // })
-  console.log(data)
+  console.log(data) 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -34,7 +34,7 @@ const AssestDetail = (assestID: any) => {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        Open Modal
+        More Details
       </Button>
       <Modal
         title="Asset Name"
