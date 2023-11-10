@@ -9,7 +9,7 @@
 .assest-wrapper{
     display: flex;
     flex-direction: row;
-    gap: 8rem;
+    gap: 5rem;
 }
 .assest-container{
     display: flex;

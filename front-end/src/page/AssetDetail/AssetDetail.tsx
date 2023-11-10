@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Button, Modal } from "antd";
+import axios from "axios";
 import "../AssetDetail/AssetDetail.css";
 // import { getAssetDetail } from '../../api/api';
 
+const AssestDetail = (props: any) => {
+  const [data, setData] = useState({
+    id: "",
+    name: "",
+    type: "",
+    status: "",
+    created_at: "",
+    updated_at: "",
+  });
+  const loadData = async () => {
+    const response = await axios.get(`http://localhost:8080/api/assets/${props.assetId}`);
+    setData(response.data);
+  };
+  useEffect(() => {
+    loadData();
+  }, [props.assetId]);
 
-const AssestDetail = (assestID: any) => {
-
-  const [data, setData] = useState({});
-  // const loadData = async () => {
-    // const response = await getAssetDetail(assestID);
-    // setData(response.data);
-  // }
-  // useEffect(() => {
-  //   loadData();
-  // })
-  console.log(data) 
+  console.log(data);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -30,21 +37,20 @@ const AssestDetail = (assestID: any) => {
     setIsModalOpen(false);
   };
 
-
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        More Details
+        Open Modal
       </Button>
       <Modal
-        title="Asset Name"
+        title={data["name"]}
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        width={650}
+        width={700}
         className="my-modal-header"
       >
-        <div className="modal-sub-title">Asset ID</div>
+        <div className="modal-sub-title">{data.id}</div>
         <div className="assest-wrapper">
           <div className="assest-container">
             <div className="subcontainer-title">
@@ -55,10 +61,10 @@ const AssestDetail = (assestID: any) => {
             </div>
 
             <div className="subcontainer-content">
-              <div>Category</div>
-              <div>Status</div>
-              <div>Created Date</div>
-              <div>Updated Date</div>
+              <div>{data.type}</div>
+              <div>{data.status}</div>
+              <div>{data.created_at}</div>
+              <div>{data.updated_at}</div>
             </div>
           </div>
           <div className="assest-container">
