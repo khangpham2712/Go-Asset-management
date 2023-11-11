@@ -1,0 +1,10 @@
+#register-layout {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#register-layout #basic {
+    width: 50rem;
+}
