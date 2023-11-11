@@ -1,7 +1,4 @@
 import { Select, Button } from 'antd';
-import type { MenuProps } from 'antd';
-import { Space, Table, Tag } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
 import axios from 'axios';
 import { ReactNode, useEffect, useState } from 'react';
 import './ViewAsset.css';
@@ -9,11 +6,46 @@ import AssetList from './AssetList';
 import internal from 'stream';
 import AddAsset from '../AddAsset/AddAsset';
 
-
+type DepartmentDataType = {
+  Id: number;
+  Name: string;
+}
 
 const ViewAsset = () => {
-  const [department, setDepartment] = useState<{id: number, name: string}>({id: 1, name: "H6"});
-  
+  const role = localStorage.getItem("role");
+  const intialDepartmentId = localStorage.getItem("id");
+
+  const [departments, setDepartments] = useState<DepartmentDataType[]>([]);
+  const [departmentOption, setDepartmentOption] = useState<{ label: string; value: string, id: number }[]>([]);
+  const [department, setDepartment] = useState<{id: number, name: string}>({id: 0, name: ""});
+
+  const url = 'http://localhost:8080/api/departments/';
+
+  useEffect(() => {
+    axios.get(url).then((response: { data: DepartmentDataType[] }) => {
+      setDepartments(response.data);
+    }).catch((error: any) => {
+      alert(error);
+    });
+  }, [department]);
+
+  useEffect(() => {
+    // if(role === "1"){
+    //   const intialDepartment = departments.find(items => items.id.toString() === intialDepartmentId);
+    //   if(intialDepartment) setDepartment({id: intialDepartment.id, name: intialDepartment.name});
+    // }
+    // else if(role === "0"){
+      setDepartmentOption([]);
+      console.log({departments});
+      departments.map((item) => {
+      setDepartmentOption([...departmentOption, {
+          label: item.Name,
+          value: item.Name,
+          id: item.Id,}])
+      })
+  }, [departments]);
+
+
   const onChange = (value: string, option: any) => {
     setDepartment({id: option.id, name: option.value});
   };
@@ -32,7 +64,7 @@ const ViewAsset = () => {
   
     return (
         <div className="Viewasset"> 
-            <div className='Viewasset--header'>
+            <div className={`Viewasset--header`}>
                 <Select
                     className='Viewasset--select'
                     showSearch
@@ -40,23 +72,11 @@ const ViewAsset = () => {
                     optionFilterProp="children"
                     onChange={onChange}
                     filterOption={filterOption}
-                    options={[
-                      {
-                        value: 'H6',
-                        label: 'H6',
-                        id: 1,
-                      },
-                    {
-                        value: 'H1',
-                        label: 'H1',
-                        id: 2,
-                    },
-                    {
-                        value: 'H2',
-                        label: 'H2',
-                        id: 3,
-                    },
-                    ]}
+                    options={departments.map(item => ({
+                      label: item.Name, 
+                      value: item.Name,
+                      id: item.Id,
+                    }))}
                 />
                 <Button type="primary" className='Viewasset--button' onClick={handleClick}>Add asset</Button>
                 {isModalOpen && <AddAsset setIsModalOpen={setIsModalOpen}/>}
