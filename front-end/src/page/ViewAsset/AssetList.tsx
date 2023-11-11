@@ -98,7 +98,7 @@ const AssetList = (props: {departmentId: number, departmentName: string}) => {
         departmentName: props.departmentName,
         createdDay: item.name,
         updatedDay: item.updated_at,
-        assetDetail: <AssetDetail key={item.id} assetId={item.id} departmentName={props.departmentName} setDeleted={setDeleted}/>,}])
+        assetDetail: <AssetDetail key={item.id} assetId={item.id} departmentName={props.departmentName} setDeleted={setDeleted}/>}])
     })
   }, [data]);
   

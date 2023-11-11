@@ -7,6 +7,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import './ViewAsset.css';
 import AssetList from './AssetList';
 import internal from 'stream';
+import AddAsset from '../AddAsset/AddAsset';
 
 
 
@@ -21,6 +22,13 @@ const ViewAsset = () => {
   const filterOption = (input: string, option?: { label: string; value: string, id: number }) =>
     (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
   
+    
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleClick = () => {
+      setIsModalOpen(true);
+    };
+    console.log(isModalOpen)
   
     return (
         <div className="Viewasset"> 
@@ -50,7 +58,8 @@ const ViewAsset = () => {
                     },
                     ]}
                 />
-                <Button type="primary" className='Viewasset--button'>Add asset</Button>
+                <Button type="primary" className='Viewasset--button' onClick={handleClick}>Add asset</Button>
+                {isModalOpen && <AddAsset setIsModalOpen={setIsModalOpen}/>}
             </div>
             <AssetList departmentId={department.id} departmentName={department.name} />
         </div>
