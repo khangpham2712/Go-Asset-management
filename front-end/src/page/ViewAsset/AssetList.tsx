@@ -27,7 +27,7 @@ type AssetDataType = {
     assetDetail: ReactNode;
 }
 
-  const columns: ColumnsType<DataType> = [
+const columns: ColumnsType<DataType> = [
     {
         title: 'ID',
         dataIndex: 'assetId',

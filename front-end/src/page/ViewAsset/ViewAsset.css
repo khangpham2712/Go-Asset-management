@@ -1,8 +1,11 @@
-.Viewasset--header {
+.Viewasset--header__manager {
   display: flex;
   justify-content: flex-end;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+.Viewasset--header__department {
+  display: none;
 }
 
 .Viewasset--select {
