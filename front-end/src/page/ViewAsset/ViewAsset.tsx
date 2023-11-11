@@ -28,19 +28,18 @@ const ViewAsset = () => {
   }, [department]);
 
   useEffect(() => {
-    // if(role === "1"){
-    //   const intialDepartment = departments.find(items => items.id.toString() === intialDepartmentId);
-    //   if(intialDepartment) setDepartment({id: intialDepartment.id, name: intialDepartment.name});
-    // }
-    // else if(role === "0"){
+    if(role === "1"){
+      const intialDepartment = departments.find(items => items.Id.toString() === intialDepartmentId);
+      if(intialDepartment) setDepartment({id: intialDepartment.Id, name: intialDepartment.Name});
+    }
+    else if(role === "0"){
       setDepartmentOption([]);
-      console.log({departments});
       departments.map((item) => {
       setDepartmentOption([...departmentOption, {
           label: item.Name,
           value: item.Name,
           id: item.Id,}])
-      })
+      })}
   }, [departments]);
 
 
@@ -55,7 +54,7 @@ const ViewAsset = () => {
 
     return (
         <div className="Viewasset"> 
-            <div className={`Viewasset--header`}>
+            <div className={`Viewasset--header__${role === "0" ? `manager` : `department`}`}>
                 <Select
                     className='Viewasset--select'
                     showSearch

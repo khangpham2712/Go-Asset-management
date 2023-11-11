@@ -39,6 +39,8 @@ const Login = () => {
         // Login successful, you can handle the response accordingly
         const userData = await response.json();
         console.log('Login successful. User data:', userData);
+        localStorage.setItem('role', userData.Role);
+        localStorage.setItem('id', userData.Id);
         window.location.href = "../view-asset"
       } else {
         // Login failed, handle the error response

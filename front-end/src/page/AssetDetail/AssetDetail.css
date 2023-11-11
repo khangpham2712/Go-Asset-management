@@ -1,44 +1,50 @@
-.modal-sub-title{
-    color: #AAAAAA;
-    font-style: normal;
-    font-weight: 400;
-    margin-top: -0.4rem;
-    padding-bottom: 0.5rem;
+.modal-sub-title {
+  color: #aaaaaa;
+  font-style: normal;
+  font-weight: 400;
+  margin-top: -0.4rem;
+  padding-bottom: 0.5rem;
+}
+.assest-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 5rem;
+}
+.assest-container {
+  display: flex;
+  flex-shrink: 0;
+  gap: 2rem;
+  flex-direction: row;
+  padding-top: 0.8rem;
+}
+.subcontainer-title {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  flex-shrink: 0;
+  font-weight: 500;
+  gap: 0.8rem;
+}
+.subcontainer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  flex-shrink: 0;
+  font-weight: 400;
+  gap: 0.8rem;
+}
+.ant-modal-title {
+  font-size: 18px !important;
+}
 
+.more-actions {
+  display: flex;
+  gap: 1rem;
 }
-.assest-wrapper{
-    display: flex;
-    flex-direction: row;
-    gap: 5rem;
-}
-.assest-container{
-    display: flex;
-    flex-shrink: 0;
-    gap: 2rem;
-    flex-direction: row;
-    padding-top: 0.8rem;
-}
-.subcontainer-title{
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    flex-shrink: 0;
-    font-weight: 500;
-    gap: 0.8rem;
-}
-.subcontainer-content{
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-    flex-shrink: 0;
-    font-weight: 400;
-    gap: 0.8rem;
-}
-.ant-modal-title{
-    font-size: 18px!important;
+.DeleteButton__department {
+  display: none;
 }
 
-.more-actions{
-    display: flex;
-    gap: 1rem;
+.DeleteButton__manager {
+  display: block;
 }

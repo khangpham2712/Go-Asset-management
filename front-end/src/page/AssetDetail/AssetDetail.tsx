@@ -53,6 +53,7 @@ const AssestDetail = (props: any) => {
     props.setDeleted(true);
 
   };
+  const role = localStorage.getItem("role");
 
   return (
     <>
@@ -60,7 +61,7 @@ const AssestDetail = (props: any) => {
       <Button type="primary" onClick={showModal}>
         View Asset
       </Button>
-      <Button type="primary" danger onClick={deleteData}>
+      <Button className={`DeleteButton__${role === "0" ? `manager` : `department`}`} type="primary" danger onClick={deleteData}>
         Delete
       </Button>
     </div>
