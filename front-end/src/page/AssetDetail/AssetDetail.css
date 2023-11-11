@@ -37,3 +37,8 @@
 .ant-modal-title{
     font-size: 18px!important;
 }
+
+.more-actions{
+    display: flex;
+    gap: 1rem;
+}

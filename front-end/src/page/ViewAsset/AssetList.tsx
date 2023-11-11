@@ -73,6 +73,7 @@ type AssetDataType = {
 const AssetList = (props: {departmentId: number, departmentName: string}) => {
   const [data, setData] = useState<AssetDataType[]>([]);
   const [showItems, setShowItems] = useState<DataType[]>([]);
+  const [deleted, setDeleted] = useState(false);
 
   const url = 'http://localhost:8080/api/assets/?department_id=' + props.departmentId;
 
@@ -82,7 +83,8 @@ const AssetList = (props: {departmentId: number, departmentName: string}) => {
     }).catch((error: any) => {
       alert(error);
     });
-  }, [props.departmentId]);
+  }, [props.departmentId, deleted]);
+
   
   useEffect(() => {
     setShowItems([]);
@@ -96,10 +98,10 @@ const AssetList = (props: {departmentId: number, departmentName: string}) => {
         departmentName: props.departmentName,
         createdDay: item.name,
         updatedDay: item.updated_at,
-        assetDetail: <AssetDetail assetId={item.id}/>,}])
+        assetDetail: <AssetDetail key={item.id} assetId={item.id} departmentName={props.departmentName} setDeleted={setDeleted}/>,}])
     })
   }, [data]);
-
+  
     return (
         <div className="Viewasset"> 
             <div className='Viewasset--table'>

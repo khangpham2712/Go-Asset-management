@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Modal } from "antd";
 import axios from "axios";
 import "../AssetDetail/AssetDetail.css";
+import { deleteData } from "../../utils/api";
 // import { getAssetDetail } from '../../api/api';
 
 const AssestDetail = (props: any) => {
@@ -10,18 +11,26 @@ const AssestDetail = (props: any) => {
     name: "",
     type: "",
     status: "",
+    department_name: "",
     created_at: "",
     updated_at: "",
+    description: "",
+    status_note: "",
   });
+
   const loadData = async () => {
-    const response = await axios.get(`http://localhost:8080/api/assets/${props.assetId}`);
+    const response = await axios.get(
+      `http://localhost:8080/api/assets/${props.assetId}`
+    );
     setData(response.data);
   };
   useEffect(() => {
     loadData();
   }, [props.assetId]);
 
-  console.log(data);
+ 
+  // console.log(props)
+
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -37,11 +46,24 @@ const AssestDetail = (props: any) => {
     setIsModalOpen(false);
   };
 
+  const deleteData = async () => {
+    const response =  await axios.delete(
+      `http://localhost:8080/api/assets/${props.assetId}`
+    );
+    props.setDeleted(true);
+
+  };
+
   return (
     <>
+    <div className="more-actions">
       <Button type="primary" onClick={showModal}>
-        Open Modal
+        View Asset
       </Button>
+      <Button type="primary" danger onClick={deleteData}>
+        Delete
+      </Button>
+    </div>
       <Modal
         title={data["name"]}
         open={isModalOpen}
@@ -70,14 +92,14 @@ const AssestDetail = (props: any) => {
           <div className="assest-container">
             <div className="subcontainer-title">
               <div>Department Name</div>
-              <div>Room Number</div>
+              {/* <div>Room Number</div> */}
               <div>Cost</div>
             </div>
 
             <div className="subcontainer-content">
-              <div>Department Name</div>
-              <div>Room Number</div>
-              <div>Cost</div>
+              <div>{props.departmentName}</div>
+              {/* <div>H2</div> */}
+              <div>$20</div>
             </div>
           </div>
         </div>
@@ -88,8 +110,8 @@ const AssestDetail = (props: any) => {
             <div>Status Note</div>
           </div>
           <div className="subcontainer-content">
-            <div>Description</div>
-            <div>Status Note</div>
+            <div>{data.description}</div>
+            <div>{data.status_note}</div>
           </div>
         </div>
       </Modal>
