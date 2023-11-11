@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300&display=swap');
+
+
+.addDeBox{
+    width: 800px;
+height: 550px;
+border-radius: 20px;
+background: #FDFDFF;
+padding-top: 15px;
+margin: auto;
+margin-top: 50px;
+box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.fillbox{
+    width: 400px;
+   
+    margin-top: 15px;
+}
+.Department-name-text{
+    width: 400px;
+    color: #000;
+    font-family: 'Be Vietnam Pro', sans-serif;
+font-size: 22px;
+font-style: normal;
+text-align: left;
+font-weight: 700;
+line-height: normal;
+margin-left: 36px;
+}
+
+.fill-box-text{
+    color: #000;
+    width: 400px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+font-size: 18px;
+font-style: normal;
+text-align: left;
+margin-left: 36px;
+font-weight: 700;
+line-height: normal;
+}
+
+.Input{
+    width: 330px;
+height: 35px;
+flex-shrink: 0;
+border: 1px solid #CCC;
+background: #FFF;
+margin-top: 15px;
+font-size: 14px;
+font-family: 'Be Vietnam Pro', sans-serif;
+border-radius: 0%;
+}
+
+.Input::placeholder{
+    color: rgba(204, 204, 204, 0.80);
+
+text-align: center;
+font-family: Be Vietnam Pro;
+font-size: 14px;
+
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.button-confirm{
+    width: 120px;
+height: 40px;
+flex-shrink: 0;
+margin-left: 650px;
+margin-top: 65px;
+font-family: Be Vietnam Pro;
+font-size: 14px;
+background-color: #FF0BA3;
+border-radius: 5%;
+}
+hr{
+    width: 97%; /* Độ dài tương đối, bạn có thể điều chỉnh giá trị này */
+            color: #CCCCCC; /* Màu đường ngang */
+            background-color: #CCCCCC; /* Màu nền (có thể giống hoặc khác màu với đường ngang) */
+            height: 1px; /* Độ dày của đường ngang */
+            border: none; /* Loại bỏ viền */
+}
+
+.close-icon{
+    font-size: 24px;
+    color: #CCCCCC;
+    margin-left: 720px;
+    margin-top: 20px;
+    
+}
