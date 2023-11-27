@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Button, Modal } from "antd";
 import axios from "axios";
 import "../AssetDetail/AssetDetail.css";
-import { deleteData } from "../../utils/api";
-// import { getAssetDetail } from '../../api/api';
 
 const AssestDetail = (props: any) => {
   const [data, setData] = useState({
@@ -12,6 +10,7 @@ const AssestDetail = (props: any) => {
     type: "",
     status: "",
     department_name: "",
+    owner: "",
     created_at: "",
     updated_at: "",
     description: "",
@@ -28,46 +27,25 @@ const AssestDetail = (props: any) => {
     loadData();
   }, [props.assetId]);
 
- 
-  // console.log(props)
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
+  // const showModal = () => {
+  //   props.setIsModalOpen(true);
+  // };
 
   const handleOk = () => {
-    setIsModalOpen(false);
+    props.setIsModalOpen(false);
   };
 
   const handleCancel = () => {
-    setIsModalOpen(false);
+    props.setIsModalOpen(false);
   };
-
-  const deleteData = async () => {
-    const response =  await axios.delete(
-      `http://localhost:8080/api/assets/${props.assetId}`
-    );
-    props.setDeleted(true);
-
-  };
-  const role = localStorage.getItem("role");
 
   return (
     <>
-    <div className="more-actions">
-      <Button type="primary" onClick={showModal}>
-        View Asset
-      </Button>
-      <Button className={`DeleteButton__${role === "0" ? `manager` : `department`}`} type="primary" danger onClick={deleteData}>
-        Delete
-      </Button>
-    </div>
       <Modal
         title={data["name"]}
-        open={isModalOpen}
+        open={true}
         onOk={handleOk}
         onCancel={handleCancel}
         width={700}
@@ -94,13 +72,13 @@ const AssestDetail = (props: any) => {
             <div className="subcontainer-title">
               <div>Department Name</div>
               {/* <div>Room Number</div> */}
-              <div>Cost</div>
+              <div>Owner</div>
             </div>
 
             <div className="subcontainer-content">
               <div>{props.departmentName}</div>
               {/* <div>H2</div> */}
-              <div>$20</div>
+              <div>{data.owner}</div>
             </div>
           </div>
         </div>

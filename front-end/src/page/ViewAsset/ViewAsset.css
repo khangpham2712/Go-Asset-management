@@ -15,3 +15,15 @@
 .Viewasset--button {
   margin-right: 10px;
 }
+
+.more-actions {
+  display: flex;
+  gap: 1rem;
+}
+.DeleteButton__department {
+  display: none;
+}
+
+.DeleteButton__manager {
+  display: block;
+}
