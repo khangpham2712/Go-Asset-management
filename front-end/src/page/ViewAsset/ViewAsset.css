@@ -1,7 +1,6 @@
 .Viewasset--header__manager {
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
   margin-bottom: 10px;
 }
 .Viewasset--header__department {
@@ -10,8 +9,29 @@
 
 .Viewasset--select {
   margin-right: 10px;
+  width: 200px;
+  border: 1px solid #1601b8;
+  border-radius: 7px;
+}
+.Viewasset--select .ant-select-selector {
+  color: #1601b8;
+  font-weight: bold;
+}
+.Viewasset--button {
+  background-color: #1601b8;
+  color: #fff;
 }
 
-.Viewasset--button {
-  margin-right: 10px;
+.Viewasset--container {
+  padding: 120px 40px 10px;
+}
+
+.AssetList {
+  border: 0.5px solid #3c2ebe;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.AssetList--table .ant-table-thead .ant-table-cell {
+  color: #1601b8;
 }

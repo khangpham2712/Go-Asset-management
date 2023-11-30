@@ -5,6 +5,8 @@ import './ViewAsset.css';
 import AssetList from './AssetList';
 import internal from 'stream';
 import AddAsset from '../AddAsset/AddAsset';
+import { PlusOutlined } from '@ant-design/icons';
+import {Header } from '../../components/Header/Header';
 
 type DepartmentDataType = {
   Id: number;
@@ -13,14 +15,21 @@ type DepartmentDataType = {
 
 const ViewAsset = () => {
   const role = localStorage.getItem("role");
-  const intialDepartmentId = localStorage.getItem("id");
+  const intialDepartmentId = localStorage.getItem("MYAPP_DEPARTMENTID");
+  const intialDepartmentName = localStorage.getItem("MYAPP_DEPARTMENTNAME");
+
+  // const [Department, setDepartment] = useState<string>((intialDepartment === null) ? 'vi' : intialDepartment);
+
 
   const [departments, setDepartments] = useState<DepartmentDataType[]>([]);
   const [departmentOption, setDepartmentOption] = useState<{ label: string; value: string, id: number }[]>([]);
   const [department, setDepartment] = useState<{id: number, name: string}>({id: 0, name: ""});
-
+  // const [department, setDepartment] = useState<{id: number, name: string}>((intialDepartmentId === null && intialDepartmentName === null) ? {id: 0, name: ""} : {id: parseInt(intialDepartmentId), name: intialDepartmentName});
   const url = 'http://localhost:8080/api/departments/';
-
+  // useEffect(() =>
+  // {
+  //     localStorage.setItem('MYAPP_DEPARTMENT', Department);
+  // }, [Department]);
   useEffect(() => {
     axios.get(url).then((response: { data: DepartmentDataType[] }) => {
       setDepartments(response.data);
@@ -61,8 +70,12 @@ const ViewAsset = () => {
     };
     console.log(isModalOpen)
   
+
     return (
         <div className="Viewasset"> 
+            <Header />
+            <div className="Viewasset--container">
+            {role === "1" ? <p>{department.name} Department</p> : <></>}
             <div className={`Viewasset--header__${role === "0" ? `manager` : `department`}`}>
                 <Select
                     className='Viewasset--select'
@@ -77,10 +90,11 @@ const ViewAsset = () => {
                       id: item.Id,
                     }))}
                 />
-                <Button type="primary" className='Viewasset--button' onClick={handleClick}>Add asset</Button>
+                <Button type="primary" className='Viewasset--button' onClick={handleClick}>Add asset <PlusOutlined /></Button>
                 {isModalOpen && <AddAsset setIsModalOpen={setIsModalOpen}/>}
             </div>
             <AssetList departmentId={department.id} departmentName={department.name} />
+            </div>
         </div>
     );
   }

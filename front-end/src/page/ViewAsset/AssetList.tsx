@@ -55,8 +55,8 @@ const columns: ColumnsType<DataType> = [
     },
     {
         title: 'Created Day',
-        dataIndex: 'updatedDay',
-        key: 'updatedDay',
+        dataIndex: 'createdDay',
+        key: 'createdDay',
       },
     {
         title: 'Updated Day',
@@ -85,7 +85,7 @@ const AssetList = (props: {departmentId: number, departmentName: string}) => {
     });
   }, [props.departmentId, deleted]);
 
-  
+
   useEffect(() => {
     setShowItems([]);
     data.map((item, index) => {
@@ -96,15 +96,15 @@ const AssetList = (props: {departmentId: number, departmentName: string}) => {
         category: item.type,
         status: item.status,
         departmentName: props.departmentName,
-        createdDay: item.name,
-        updatedDay: item.updated_at,
+        createdDay: createdDay,
+        updatedDay: createdDay,
         assetDetail: <AssetDetail key={item.id} assetId={item.id} departmentName={props.departmentName} setDeleted={setDeleted}/>}])
     })
   }, [data]);
   
     return (
-        <div className="Viewasset"> 
-            <div className='Viewasset--table'>
+        <div className="AssetList"> 
+            <div className='AssetList--table'>
                 <Table columns={columns} dataSource={showItems} />
             </div>
         </div>

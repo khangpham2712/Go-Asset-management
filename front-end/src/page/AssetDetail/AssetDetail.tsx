@@ -58,7 +58,7 @@ const AssestDetail = (props: any) => {
   return (
     <>
     <div className="more-actions">
-      <Button type="primary" onClick={showModal}>
+      <Button onClick={showModal} style={{backgroundColor: '#3C2EBE', color: '#fff'}}>
         View Asset
       </Button>
       <Button className={`DeleteButton__${role === "0" ? `manager` : `department`}`} type="primary" danger onClick={deleteData}>
