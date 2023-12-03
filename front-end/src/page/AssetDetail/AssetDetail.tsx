@@ -95,8 +95,8 @@ const AssestDetail = (props: any) => {
             </div>
 
             <div className="subcontainer-content">
-              {isEdit ? <Input className="custom_modal_input" value={data.type ?? ""}/> : <div>{data.type}</div>}
-              {isEdit ? <Input className="custom_modal_input" value={data.status ?? ""}/> : <div>{data.status}</div>}
+              {isEdit ? <Input className="custom_modal_input" defaultValue={data.type ?? ""}/> : <div>{data.type}</div>}
+              {isEdit ? <Input className="custom_modal_input" defaultValue={data.status ?? ""}/> : <div>{data.status}</div>}
               {/* {isEdit ? <Input className="custom_modal_input" value={dateFormatter(data.created_at) ?? ""}/> : <div>{dateFormatter(data.created_at)}</div>} */}
               {/* <div>{data.status}</div> */}
               <div>{dateFormatter(data.created_at)}</div>
@@ -114,7 +114,7 @@ const AssestDetail = (props: any) => {
             <div className="subcontainer-content">
               <div>{props.departmentName}</div>
               {/* <div>$20</div> */}
-              {isEdit ? <Input className="custom_modal_input" value={"$20" ?? ""}/> : <div>{"$20"}</div>}
+              {isEdit ? <Input className="custom_modal_input" defaultValue={"$20" ?? ""}/> : <div>{"$20"}</div>}
               <div>{dateFormatter(data.updated_at)}</div>
             </div>
           </div>
