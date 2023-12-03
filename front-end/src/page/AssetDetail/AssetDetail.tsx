@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Modal } from "antd";
+import { Button, Input, Modal } from "antd";
 import axios from "axios";
 import "../AssetDetail/AssetDetail.css";
 import { deleteData } from "../../utils/api";
@@ -33,17 +33,19 @@ const AssestDetail = (props: any) => {
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
 
   const showModal = () => {
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
+  const handleEdit = () => {
+    setIsEdit(!isEdit);
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
+    setIsEdit(false);
   };
 
   const deleteData = async () => {
@@ -55,7 +57,7 @@ const AssestDetail = (props: any) => {
   };
   const role = localStorage.getItem("role");
 
-  const dateFormater = (input_date: string) => {
+  const dateFormatter = (input_date: string) => {
     const date = new Date(input_date)
     return date.toLocaleDateString('en-GB', {
       day: '2-digit',
@@ -77,7 +79,8 @@ const AssestDetail = (props: any) => {
       <Modal
         title={data["name"]}
         open={isModalOpen}
-        onOk={handleOk}
+        onOk={handleEdit}
+        okText= {isEdit ? "Save" : "Edit"}
         onCancel={handleCancel}
         width={700}
         className="my-modal-header"
@@ -92,9 +95,11 @@ const AssestDetail = (props: any) => {
             </div>
 
             <div className="subcontainer-content">
-              <div>{data.type}</div>
-              <div>{data.status}</div>
-              <div>{dateFormater(data.created_at)}</div>
+              {isEdit ? <Input className="custom_modal_input" value={data.type ?? ""}/> : <div>{data.type}</div>}
+              {isEdit ? <Input className="custom_modal_input" value={data.status ?? ""}/> : <div>{data.status}</div>}
+              {/* {isEdit ? <Input className="custom_modal_input" value={dateFormatter(data.created_at) ?? ""}/> : <div>{dateFormatter(data.created_at)}</div>} */}
+              {/* <div>{data.status}</div> */}
+              <div>{dateFormatter(data.created_at)}</div>
             </div>
           </div>
 
@@ -108,9 +113,9 @@ const AssestDetail = (props: any) => {
 
             <div className="subcontainer-content">
               <div>{props.departmentName}</div>
-              {/* <div>H2</div> */}
-              <div>$20</div>
-              <div>{dateFormater(data.updated_at)}</div>
+              {/* <div>$20</div> */}
+              {isEdit ? <Input className="custom_modal_input" value={"$20" ?? ""}/> : <div>{"$20"}</div>}
+              <div>{dateFormatter(data.updated_at)}</div>
             </div>
           </div>
         </div>
@@ -121,7 +126,8 @@ const AssestDetail = (props: any) => {
             <div>Status Note</div>
           </div>
           <div className="subcontainer-content">
-            <div>{data.description}</div>
+            {/* <div>{data.description}</div> */}
+            <Input disabled={!isEdit} placeholder="Asset description"/>
             <div>{data.status_note}</div>
           </div>
         </div>
