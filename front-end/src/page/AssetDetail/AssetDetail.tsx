@@ -55,6 +55,15 @@ const AssestDetail = (props: any) => {
   };
   const role = localStorage.getItem("role");
 
+  const dateFormater = (input_date: string) => {
+    const date = new Date(input_date)
+    return date.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
+  }
+
   return (
     <>
     <div className="more-actions">
@@ -80,27 +89,28 @@ const AssestDetail = (props: any) => {
               <div>Category</div>
               <div>Status</div>
               <div>Created Date</div>
-              <div>Updated Date</div>
             </div>
 
             <div className="subcontainer-content">
               <div>{data.type}</div>
               <div>{data.status}</div>
-              <div>{data.created_at}</div>
-              <div>{data.updated_at}</div>
+              <div>{dateFormater(data.created_at)}</div>
             </div>
           </div>
+
           <div className="assest-container">
             <div className="subcontainer-title">
               <div>Department Name</div>
               {/* <div>Room Number</div> */}
               <div>Cost</div>
+              <div>Updated Date</div>
             </div>
 
             <div className="subcontainer-content">
               <div>{props.departmentName}</div>
               {/* <div>H2</div> */}
               <div>$20</div>
+              <div>{dateFormater(data.updated_at)}</div>
             </div>
           </div>
         </div>
