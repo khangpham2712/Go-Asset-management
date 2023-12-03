@@ -10,13 +10,21 @@
   /* flex-direction: row; */
   /* gap: 5rem; */
   justify-content: space-between;
+  margin-bottom: 1rem;
 }
 .assest-container {
   display: flex;
   /* flex-shrink: 0; */
   gap: 2rem;
+  width: 50%;
   flex-direction: row;
-  padding-top: 0.8rem;
+  padding-top: 01rem;
+}
+
+.last-asset-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 .subcontainer-title {
@@ -25,15 +33,22 @@
   align-items: left;
   flex-shrink: 0;
   font-weight: 500;
-  gap: 0.8rem;
+  gap: 01rem;
 }
+
 .subcontainer-content {
   display: flex;
   flex-direction: column;
   align-items: left;
   flex-shrink: 0;
   font-weight: 400;
-  gap: 0.8rem;
+  gap: 01rem;
+}
+
+.description_note {
+  display: flex;
+  gap: 3rem;
+  font-weight: 500;
 }
 
 .ant-modal-title {
