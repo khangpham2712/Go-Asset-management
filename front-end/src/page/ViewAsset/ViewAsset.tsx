@@ -68,7 +68,7 @@ const ViewAsset = () => {
     const handleClick = () => {
       setIsModalOpen(true);
     };
-    console.log(isModalOpen)
+    // console.log(isModalOpen)
   
 
     return (

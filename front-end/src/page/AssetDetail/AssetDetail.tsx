@@ -168,19 +168,19 @@ const AssestDetail = (props: any) => {
         <div className="assest-wrapper">
           <div className="assest-container">
             <div className="subcontainer-title">
+              <div>Name</div>
               <div>Category</div>
-              <div>Status</div>
               <div>Created Date</div>
             </div>
 
             <div className="subcontainer-content">
               {
-                isEdit ? <Input name ="type" className="custom_modal_input" defaultValue={data.type ?? ""} onChange={handleUpdateAsset}/> :
-                <div>{data.type}</div>
+                isEdit ? <Input name ="name" className="custom_modal_input" defaultValue={data.name ?? ""} onChange={handleUpdateAsset}/> :
+                <div>{data.name}</div>
               }
               {
-                isEdit ? <Input name="status" className="custom_modal_input" defaultValue={data.status ?? ""} onChange={handleUpdateAsset}/> :
-                <div>{data.status}</div>
+                isEdit ? <Input name ="type" className="custom_modal_input" defaultValue={data.type ?? ""} onChange={handleUpdateAsset}/> :
+                <div>{data.type}</div>
               }
               {/* {isEdit ? <Input className="custom_modal_input" value={dateFormatter(data.created_at) ?? ""}/> : <div>{dateFormatter(data.created_at)}</div>} */}
               {/* <div>{data.status}</div> */}
@@ -192,7 +192,7 @@ const AssestDetail = (props: any) => {
             <div className="subcontainer-title">
               <div>Department Name</div>
               {/* <div>Room Number</div> */}
-              <div>Cost</div>
+              <div>Status</div>
               <div>Updated Date</div>
             </div>
 
@@ -225,7 +225,10 @@ const AssestDetail = (props: any) => {
               <div>{props.departmentName}</div>
 
               {/* <div>$20</div> */}
-              {isEdit ? <Input name="cost" className="custom_modal_input" defaultValue={"$20" ?? ""}/> : <div>{"$20"}</div>}
+              {
+                isEdit ? <Input name="status" className="custom_modal_input" defaultValue={data.status ?? ""} onChange={handleUpdateAsset}/> :
+                <div>{data.status}</div>
+              }
               <div>{dateFormatter(data.updated_at)}</div>
             </div>
           </div>
