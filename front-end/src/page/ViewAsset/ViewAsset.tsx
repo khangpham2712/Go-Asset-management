@@ -78,6 +78,7 @@ const ViewAsset = () => {
             {role === "1" ? <p>{department.name} Department</p> : <></>}
             <div className={`Viewasset--header__${role === "0" ? `manager` : `department`}`}>
                 <Select
+                    id="department-select"
                     className='Viewasset--select'
                     showSearch
                     placeholder="Select department"
@@ -90,7 +91,7 @@ const ViewAsset = () => {
                       id: item.Id,
                     }))}
                 />
-                <Button type="primary" className='Viewasset--button' onClick={handleClick}>Add asset <PlusOutlined /></Button>
+                <Button id="btn-add-asset" type="primary" className='Viewasset--button' onClick={handleClick}>Add asset <PlusOutlined /></Button>
                 {isModalOpen && <AddAsset setIsModalOpen={setIsModalOpen}/>}
             </div>
             <AssetList departmentId={department.id} departmentName={department.name} />
