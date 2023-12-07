@@ -35,3 +35,15 @@
 .AssetList--table .ant-table-thead .ant-table-cell {
   color: #1601b8;
 }
+
+.more-actions {
+  display: flex;
+  gap: 1rem;
+}
+.DeleteButton__department {
+  display: none;
+}
+
+.DeleteButton__manager {
+  display: block;
+}
