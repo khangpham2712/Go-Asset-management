@@ -30,7 +30,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
 const Login = () => {
-  const [loginErr, setLoginErr] = useState<Boolean>()
+  const [loginErr, setLoginErr] = useState('')
   // const onFinish = async (info:any) => {
   //   console.log('info', info)
   //   // const res = await login(info);
@@ -61,9 +61,10 @@ const Login = () => {
           "Password": data.get('password'),
         }),
       });
-
+      if (data.get('username') === '' || data.get('password') === '')
+        setLoginErr('unfilled')
       // Check if the request was successful (status code 2xx)
-      if (response.ok) {
+      else if (response.ok) {
         // Login successful, you can handle the response accordingly
         const userData = await response.json();
         console.log('Login successful. User data:', userData);
@@ -74,20 +75,14 @@ const Login = () => {
         // Login failed, handle the error response
         const errorData = await response.json();
         console.error('Login failed:', errorData);
-        setLoginErr(false);
+        setLoginErr('invalid');
       }
     } catch (error) {
       // Handle network or other errors
       console.error('Error during login:', error);
-      setLoginErr(false);
+      setLoginErr('invalid');
     }
   };
-
-  // const onFinishFailed = (errorInfo:string) => (e:any) => {
-  //   console.log('Failed:', errorInfo);
-  //   console.log('Failed:', e);
-
-  // };
 
   return (
     // <div id="login-layout">
@@ -212,7 +207,7 @@ const Login = () => {
             <Typography component="h1" variant="h5">
               Đăng Nhập
             </Typography>
-            <Box component="form" noValidate onSubmit={onFinish} sx={{ mt: 1, display:'flex', flexDirection:'column', width: '89%' }}>
+            <Box component="form" noValidate onSubmit={onFinish} sx={{ mt: 1, display: 'flex', flexDirection: 'column', width: '89%' }}>
               <TextField
                 margin="normal"
                 required
@@ -233,9 +228,14 @@ const Login = () => {
                 id="password"
                 autoComplete="current-password"
               />
-              {loginErr === false ?
+              {loginErr === 'invalid' ?
                 <Typography component="p" sx={{ color: "red" }}>
                   Đăng nhập thất bại: Sai tên tài khoản hoặc mật khẩu
+                </Typography>
+                : null
+              } {loginErr === 'unfilled' ?
+                <Typography component="p" sx={{ color: "red" }}>
+                  Vui lòng điền đủ tài khoản và mật khẩu
                 </Typography>
                 : null
               }
