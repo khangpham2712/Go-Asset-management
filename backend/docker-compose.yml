@@ -1,0 +1,20 @@
+version: '3.5'
+
+services:
+  backend:
+    build: .
+    container_name: backend-app
+    ports:
+      - 8080:8080
+
+  db:
+    image: mysql
+    container_name: mysql-db
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=sugoi
+      - MYSQL_DATABASE=sw
+
