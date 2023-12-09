@@ -7,6 +7,8 @@ import ViewAsset from './page/ViewAsset/ViewAsset';
 import Login from './page/login/login';
 import Register from './page/register/register';
 import AssetDetail from './page/AssetDetail/AssetDetail';
+import ViewUser from  './page/ViewUser/ViewUser';
+import AddUser from './page/AddUser/AddUser';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
       <Route path='/register' element={<Register/>} />
       <Route path='/view-asset' element={<ViewAsset />} />
       <Route path='/asset-detail' element={<AssetDetail />} />
+      <Route path='/view-user' element={<ViewUser />} />
+      <Route path='/add-user' element={<AddUser />} />
     </Routes>
     </div>
   );

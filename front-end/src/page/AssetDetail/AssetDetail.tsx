@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Button, Modal } from "antd";
 import axios from "axios";
 import "../AssetDetail/AssetDetail.css";
-import { deleteData } from "../../utils/api";
-// import { getAssetDetail } from '../../api/api';
 
 const AssestDetail = (props: any) => {
   const [data, setData] = useState({
@@ -11,7 +9,8 @@ const AssestDetail = (props: any) => {
     name: "",
     type: "",
     status: "",
-    department_name: "",
+    // department_name: "",
+    employee_name: "",
     created_at: "",
     updated_at: "",
     description: "",
@@ -19,99 +18,86 @@ const AssestDetail = (props: any) => {
   });
 
   const loadData = async () => {
-    const response = await axios.get(
+    await axios.get(
       `http://localhost:8080/api/assets/${props.assetId}`
-    );
-    setData(response.data);
+    ) 
+    .then((response) => {
+      setData(response.data);
+      console.log(response.data)
+    })
+    .catch((error: any) => {
+      alert(error);
+    });
   };
   useEffect(() => {
     loadData();
   }, [props.assetId]);
 
- 
-  // console.log(props)
-
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
   const handleOk = () => {
-    setIsModalOpen(false);
+    props.setIsModalOpen(false);
   };
 
   const handleCancel = () => {
-    setIsModalOpen(false);
+    props.setIsModalOpen(false);
   };
-
-  const deleteData = async () => {
-    const response =  await axios.delete(
-      `http://localhost:8080/api/assets/${props.assetId}`
-    );
-    props.setDeleted(true);
-
-  };
-  const role = localStorage.getItem("role");
 
   return (
     <>
-    <div className="more-actions">
-      <Button type="primary" onClick={showModal}>
-        View Asset
-      </Button>
-      <Button className={`DeleteButton__${role === "0" ? `manager` : `department`}`} type="primary" danger onClick={deleteData}>
-        Delete
-      </Button>
-    </div>
       <Modal
         title={data["name"]}
-        open={isModalOpen}
+        open={true}
         onOk={handleOk}
         onCancel={handleCancel}
-        width={700}
-        className="my-modal-header"
+        width={780}
+        className="my-modal"
+        footer={null}
       >
         <div className="modal-sub-title">{data.id}</div>
         <div className="assest-wrapper">
           <div className="assest-container">
             <div className="subcontainer-title">
               <div>Category</div>
-              <div>Status</div>
+              {/* <div>Status</div> */}
               <div>Created Date</div>
               <div>Updated Date</div>
             </div>
 
             <div className="subcontainer-content">
               <div>{data.type}</div>
-              <div>{data.status}</div>
-              <div>{data.created_at}</div>
-              <div>{data.updated_at}</div>
+              {/* <div>{data.status}</div> */}
+              <div>{data.created_at.toString().slice(0, 19).replace("T", " ")}</div>
+              <div>{data.updated_at.toString().slice(0, 19).replace("T", " ")}</div>
             </div>
           </div>
-          <div className="assest-container">
+          <div className="assest-container"  style={{flexShrink: 1}}>
             <div className="subcontainer-title">
-              <div>Department Name</div>
-              {/* <div>Room Number</div> */}
-              <div>Cost</div>
+              {/* <div>Department Name</div> */}
+              <div>Status</div>
+              <div>Employee</div>
             </div>
 
             <div className="subcontainer-content">
-              <div>{props.departmentName}</div>
-              {/* <div>H2</div> */}
-              <div>$20</div>
+              {/* <div>{props.departmentName}</div> */}
+              <div>{data.status}</div>
+              <div>{props.employeeName}</div>
             </div>
           </div>
         </div>
 
-        <div className="assest-container" style={{ gap: "2.9rem" }}>
+        <div className="assest-container" style={{ gap: "3.1rem" }}>
           <div className="subcontainer-title">
             <div>Description</div>
-            <div>Status Note</div>
           </div>
           <div className="subcontainer-content">
             <div>{data.description}</div>
+          </div>
+        </div>
+
+        <div className="assest-container" style={{ gap: "3.1rem" }}>
+          <div className="subcontainer-title">
+            <div>Status Note</div>
+          </div>
+          <div className="subcontainer-content">
             <div>{data.status_note}</div>
           </div>
         </div>

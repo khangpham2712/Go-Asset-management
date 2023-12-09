@@ -41,13 +41,13 @@ const AddAsset = (props: any) => {
 
   const onGenderChange = (value: any) => {
     switch (value) {
-      case "H6":
+      case "Information Technology":
         formRef.current?.setFieldsValue({ department_id: 1 });
         break;
-      case "H1":
+      case "Human Resources":
         formRef.current?.setFieldsValue({ department_id: 2 });
         break;
-      case "H2":
+      case "Finance":
         formRef.current?.setFieldsValue({ department_id: 3 });
         break;
       default:
@@ -125,9 +125,9 @@ const AddAsset = (props: any) => {
               onChange={onGenderChange}
               allowClear
             >
-              <Option value="1">H6</Option>
-              <Option value="2">H1</Option>
-              <Option value="3">H2</Option>
+              <Option value="1">Information Technology</Option>
+              <Option value="2">Human Resources</Option>
+              <Option value="3">Finance</Option>
             </Select>
           </Form.Item>
           <Form.Item name="type" label="Type" rules={[{ required: true }]}>
