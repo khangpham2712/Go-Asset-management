@@ -175,7 +175,7 @@ const Login = () => {
         </Card>
       </Grid>
       <Grid item xs={6} sx={{
-        backgroundColor: '#990000',
+        backgroundColor: '#3c2ebe',
         display: 'flex',
         alignItems: 'center',
         position: 'relative'
