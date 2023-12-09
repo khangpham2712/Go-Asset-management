@@ -161,7 +161,7 @@ const AddAsset = (props: any) => {
             }
           </Form.Item> */}
           <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit">
+            <Button id="submit-add-asset" type="primary" htmlType="submit">
               Submit
             </Button>
             <Button htmlType="button" onClick={onReset}>

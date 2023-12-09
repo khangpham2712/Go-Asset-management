@@ -5,19 +5,26 @@
   margin-top: -0.4rem;
   padding-bottom: 0.5rem;
 }
-
 .assest-wrapper {
   display: flex;
-  flex-direction: row;
-  gap: 5rem;
+  /* flex-direction: row; */
+  /* gap: 5rem; */
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }
-
 .assest-container {
   display: flex;
-  flex-shrink: 0;
+  /* flex-shrink: 0; */
   gap: 2rem;
+  width: 50%;
   flex-direction: row;
-  padding-top: 0.8rem;
+  padding-top: 01rem;
+}
+
+.last-asset-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 .subcontainer-title {
@@ -26,21 +33,51 @@
   align-items: left;
   flex-shrink: 0;
   font-weight: 500;
-  gap: 0.8rem;
+  gap: 01rem;
 }
 
 .subcontainer-content {
   display: flex;
   flex-direction: column;
   align-items: left;
+  flex-shrink: 0;
   font-weight: 400;
-  gap: 0.8rem;
+  gap: 01rem;
 }
 
-.my-modal .ant-modal-title {
+.description_note {
+  display: flex;
+  gap: 3rem;
+  font-weight: 500;
+}
+
+.ant-modal-title {
   font-size: 18px !important;
 }
 
-.ant-modal-body {
-  overflow-wrap: break-word;
+.more-actions {
+  display: flex;
+  gap: 1rem;
+}
+.DeleteButton__department {
+  display: none;
+}
+
+.DeleteButton__manager {
+  display: block;
+}
+
+.custom_modal_input {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  border-bottom: solid #aaaaaa 1.5px;
+}
+
+.custom_modal_input:focus {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  border-bottom: solid rgb(5, 134, 255) 1.5px;
 }
