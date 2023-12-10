@@ -12,6 +12,9 @@ on:
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./front-end
     strategy:
       matrix:
         node-version: [18.x, 16.x]
