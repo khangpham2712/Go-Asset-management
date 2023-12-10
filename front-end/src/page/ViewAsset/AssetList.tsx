@@ -93,7 +93,7 @@ const AssetList: React.FC<{ employeeId: number}> = ({ employeeId }) => {
         message.success('Asset was successfully deleted');
       })
       .catch((error: any) => {
-        console.log(error);
+        alert(error.response.data.error);
       });
   };
 
@@ -130,7 +130,7 @@ const AssetList: React.FC<{ employeeId: number}> = ({ employeeId }) => {
           updatedDay: updatedDay,
           actions: (
             <div className="more-actions">
-              <Button type="primary" onClick={() => handleClick(item.id)} data-testid="view-asset-detail">
+              <Button data-testid="view-asset-detail" type="primary" onClick={() => handleClick(item.id)}>
                 View
               </Button>
               <Popconfirm

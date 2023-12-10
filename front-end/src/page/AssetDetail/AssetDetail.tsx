@@ -46,7 +46,7 @@ const AssestDetail = (props: any) => {
       setTmpdata(response.data);
     })
     .catch((error: any) => {
-      alert(error.response.data.error);
+      // alert(error.response.data.error);
     });
   };
 
@@ -164,11 +164,11 @@ const AssestDetail = (props: any) => {
 
             <div className="subcontainer-content">
               {
-                isEdit ? <Input name ="name" className="custom_modal_input" defaultValue={data.name ?? ""} onChange={handleUpdateAsset}/> :
+                isEdit ? <Input data-testid="aname" name ="name" className="custom_modal_input" defaultValue={data.name ?? ""} onChange={handleUpdateAsset} required={true} maxLength={255}/> :
                 <div>{data.name}</div>
               }
               {
-                isEdit ? <Input name ="type" className="custom_modal_input" defaultValue={data.type ?? ""} onChange={handleUpdateAsset}/> :
+                isEdit ? <Input data-testid="atype" name ="type" className="custom_modal_input" defaultValue={data.type ?? ""} onChange={handleUpdateAsset}/> :
                 <div data-testid="category">{data.type}</div>
               }
               {/* {isEdit ? <Input className="custom_modal_input" value={dateFormatter(data.created_at) ?? ""}/> : <div>{dateFormatter(data.created_at)}</div>} */}
@@ -215,7 +215,7 @@ const AssestDetail = (props: any) => {
 
               {/* <div>$20</div> */}
               {
-                isEdit ? <Input name="status" className="custom_modal_input" defaultValue={data.status ?? ""} onChange={handleUpdateAsset}/> :
+                isEdit ? <Input data-testid="astatus" name="status" className="custom_modal_input" defaultValue={data.status ?? ""} placeholder="Name can't be empty" required={true} onChange={handleUpdateAsset}/> :
                 <div data-testid="status">{data.status}</div>
               }
               <div data-testid="updated_at">{dateFormatter(data.updated_at)}</div>

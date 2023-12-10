@@ -98,7 +98,7 @@ console.log(employees);
                         else return {}
                     })}
                 />
-                <Button type="primary" className='Viewasset--button' onClick={handleClick} data-testid="add-asset-btn">Add asset <PlusOutlined /></Button>
+                <Button type="primary" className='Viewasset--button' onClick={handleClick} data-testid="btn-add-asset">Add asset <PlusOutlined /></Button>
                 {isModalOpen && <AddAsset setIsModalOpen={setIsModalOpen}/>}
             </div>
             <AssetList employeeId={employeeId} />

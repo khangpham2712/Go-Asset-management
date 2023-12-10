@@ -33,7 +33,7 @@ describe("Delete-asset-test", () => {
 
     // 2. User clicks delete button of first asset
     render(
-      <AssetList employeeId={employeeId}/>
+      <AssetList employeeId={employeeId} />
     );
 
     const deletebtn = await screen.findAllByTestId("delete-asset");
