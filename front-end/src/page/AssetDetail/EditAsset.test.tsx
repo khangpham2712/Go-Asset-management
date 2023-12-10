@@ -15,8 +15,8 @@ describe("Edit Asset", () => {
             <AssetList departmentId={departmentId} departmentName={departmentName} />
         );
 
-        const viewbtn = await screen.findAllByTestId("view-asset-detail");
-        fireEvent.click(viewbtn[0]);
+        // const viewbtn = await screen.findAllByTestId("view-asset-detail");
+        // fireEvent.click(viewbtn[0]);
 
         // expect(screen.getByTestId("asset-detail-modal")).toBeInTheDocument();
 

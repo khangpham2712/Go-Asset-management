@@ -51,20 +51,20 @@ const AssestDetail = (props: any) => {
   }, [props.assetId]);
 
   useEffect(() => {
-    const getDepartments = async () => {
-      const response = await axios.get(
-        `http://localhost:8080/api/departments/`
-      ).then(response => {
-        setDepartments(response.data)
+    // const getDepartments = async () => {
+    //   const response = await axios.get(
+    //     `http://localhost:8080/api/departments/`
+    //   ).then(response => {
+    //     setDepartments(response.data)
 
-        // console.log(departments)
-      })
-      .catch(err => {
-        // console.log('Theres some errors', err)
-      })
-    }
+    //     // console.log(departments)
+    //   })
+    //   .catch(err => {
+    //     // console.log('Theres some errors', err)
+    //   })
+    // }
 
-    getDepartments()
+    // getDepartments()
   }, [])
 
   // onchange func

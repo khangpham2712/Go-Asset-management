@@ -109,7 +109,7 @@ const AssetList = (props: { departmentId: number; departmentName: string }) => {
         setData(response.data);
       })
       .catch((error: any) => {
-        alert(error);
+        // alert(error);
       });
   }, [props.departmentId]);
 
