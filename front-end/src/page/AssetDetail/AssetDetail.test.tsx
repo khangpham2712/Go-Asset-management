@@ -33,7 +33,7 @@ describe("Asset-detail-test", () => {
 
     // 2. User click view button of first asset
     render(
-      <AssetList employeeId={employeeId} employeeName={employeeName} />
+      <AssetList employeeId={employeeId}/>
     );
 
     const viewbtn = await screen.findAllByTestId("view-asset-detail");
@@ -89,7 +89,6 @@ describe("Asset-detail-test", () => {
     render(
       <AssetList
         employeeId={employeeId}
-        employeeName={employeeName}
       />
     );
 

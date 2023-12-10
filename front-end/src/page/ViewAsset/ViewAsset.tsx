@@ -1,16 +1,11 @@
 import { Select, Button } from 'antd';
-<<<<<<< HEAD
-import { ReactNode, useEffect, useState } from 'react';
-=======
 import axios from 'axios';
 import { useEffect, useState } from 'react';
->>>>>>> asset_list
 import './ViewAsset.css';
 import AssetList from './AssetList';
 import AddAsset from '../AddAsset/AddAsset';
 import { PlusOutlined } from '@ant-design/icons';
 import {Header } from '../../components/Header/Header';
-import axios from 'axios';
 
 type EmployeeDataType = {
   id: number;
@@ -24,47 +19,12 @@ type EmployeeDataType = {
 
 const ViewAsset = () => {
   const role = localStorage.getItem("role");
-<<<<<<< HEAD
-  const intialemployeeId = localStorage.getItem("id");
-  const intialemployeeName = localStorage.getItem("name");
-=======
   const intialEmployeeId = localStorage.getItem("MYAPP_EMPLOYEEID");
->>>>>>> asset_list
 
   const [employees, setEmployees] = useState<EmployeeDataType[]>([]);
   const [employeeOption, setEmployeeOption] = useState<{ label: string; value: string, id: number }[]>([]);
   const [employeeId, setEmployeeId] = useState<number>(0);
 
-<<<<<<< HEAD
-  const [departments, setDepartments] = useState<DepartmentDataType[]>([]);
-  const [departmentOption, setDepartmentOption] = useState<{ label: string; value: string, id: number }[]>([]);
-  const [department, setDepartment] = useState<{id: number, name: string}>({id: 0, name: ""});
-  // const [department, setDepartment] = useState<{id: number, name: string}>((intialemployeeId === null && intialemployeeName === null) ? {id: 0, name: ""} : {id: parseInt(intialemployeeId), name: intialemployeeName});
-  const url = 'http://localhost:8080/api/departments/';
-  // useEffect(() =>
-  // {
-  //     localStorage.setItem('MYAPP_DEPARTMENT', Department);
-  // }, [Department]);
-  useEffect(() => {
-    // axios
-    //   .get(url)
-    //   .then((response: { data: DepartmentDataType[] }) => {
-    //     setDepartments(response.data);
-    //   })
-    //   .catch((error: any) => {
-    //     alert(error);
-    //   });
-  }, [department]);
-
-  useEffect(() => {
-    if (role === "1") {
-      const intialDepartment = departments.find(
-        (items) => items.Id.toString() === intialemployeeId
-      );
-      // console.log(intialDepartment)
-      if (intialDepartment)
-        setDepartment({ id: intialDepartment.Id, name: intialDepartment.Name });
-=======
   const url = 'http://localhost:8080/api/users/';
 
   useEffect(() => {
@@ -82,7 +42,6 @@ const ViewAsset = () => {
     if (role === "1") {
       if (intialEmployeeId)
       setEmployeeId(parseInt(intialEmployeeId));
->>>>>>> asset_list
     } else if (role === "0") {
       setEmployeeOption([]);
       employees.map((item) => {
@@ -142,11 +101,7 @@ console.log(employees);
                 <Button type="primary" className='Viewasset--button' onClick={handleClick} data-testid="add-asset-btn">Add asset <PlusOutlined /></Button>
                 {isModalOpen && <AddAsset setIsModalOpen={setIsModalOpen}/>}
             </div>
-<<<<<<< HEAD
-            <AssetList employeeId={department.id} employeeName={department.name} />
-=======
             <AssetList employeeId={employeeId} />
->>>>>>> asset_list
             </div>
         </div>
     );

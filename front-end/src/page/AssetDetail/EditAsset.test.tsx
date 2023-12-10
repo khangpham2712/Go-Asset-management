@@ -12,7 +12,7 @@ describe("Edit Asset", () => {
         localStorage.setItem("role", "0");
 
         render(
-            <AssetList employeeId={employeeId} employeeName={employeeName} />
+            <AssetList employeeId={employeeId} />
         );
 
         // const viewbtn = await screen.findAllByTestId("view-asset-detail");

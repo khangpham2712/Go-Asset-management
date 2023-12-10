@@ -11,11 +11,7 @@ type DataType = {
   name: string;
   category: string;
   status: string;
-<<<<<<< HEAD
-  employeeName: string;
-=======
   employeeId: number;
->>>>>>> asset_list
   createdDay: string;
   updatedDay: string;
   actions: ReactNode;
@@ -53,15 +49,9 @@ const columns: ColumnsType<DataType> = [
     key: "status",
   },
   {
-<<<<<<< HEAD
-    title: "Department Name",
-    dataIndex: "employeeName",
-    key: "employeeName",
-=======
     title: "Employee ID",
     dataIndex: "employeeId",
     key: "employeeId",
->>>>>>> asset_list
   },
   {
     title: "Created Day",
@@ -80,11 +70,7 @@ const columns: ColumnsType<DataType> = [
   },
 ];
 
-<<<<<<< HEAD
-const AssetList = (props: { employeeId: number; employeeName: string }) => {
-=======
 const AssetList: React.FC<{ employeeId: number}> = ({ employeeId }) => {
->>>>>>> asset_list
   const [data, setData] = useState<AssetDataType[]>([]);
   const [showItems, setShowItems] = useState<DataType[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -107,22 +93,14 @@ const AssetList: React.FC<{ employeeId: number}> = ({ employeeId }) => {
         message.success('Asset was successfully deleted');
       })
       .catch((error: any) => {
-<<<<<<< HEAD
-        alert(error.response.data.error);
-=======
         console.log(error);
->>>>>>> asset_list
       });
   };
 
   const role = localStorage.getItem("role");
 
   const url =
-<<<<<<< HEAD
-    "http://localhost:8080/api/assets/?department_id=" + props.employeeId;
-=======
     "http://localhost:8080/api/assets/?user_id=" + employeeId;
->>>>>>> asset_list
 
   useEffect(() => {
     axios
@@ -133,11 +111,7 @@ const AssetList: React.FC<{ employeeId: number}> = ({ employeeId }) => {
       .catch((error: any) => {
         console.log(error);
       });
-<<<<<<< HEAD
-  }, [props.employeeId]);
-=======
   }, [employeeId]);
->>>>>>> asset_list
 
   useEffect(() => {
     setShowItems([]);
@@ -151,15 +125,9 @@ const AssetList: React.FC<{ employeeId: number}> = ({ employeeId }) => {
           name: item.name,
           category: item.type,
           status: item.status,
-<<<<<<< HEAD
-          employeeName: props.employeeName,
-          createdDay: item.name,
-          updatedDay: item.updated_at,
-=======
           employeeId: employeeId,
           createdDay: createdDay,
           updatedDay: updatedDay,
->>>>>>> asset_list
           actions: (
             <div className="more-actions">
               <Button type="primary" onClick={() => handleClick(item.id)} data-testid="view-asset-detail">
@@ -202,11 +170,7 @@ const AssetList: React.FC<{ employeeId: number}> = ({ employeeId }) => {
       {isModalOpen && (
         <AssetDetail
           assetId={assetId}
-<<<<<<< HEAD
-          employeeName={props.employeeName}
-=======
           employeeName={employeeId}
->>>>>>> asset_list
           setIsModalOpen={setIsModalOpen}
         />
       )}
