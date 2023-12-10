@@ -60,7 +60,7 @@ const AddAsset = (props: any) => {
         console.log("fsf");
         console.log(values)
       // Make a POST request to your registration API endpoint
-      const response = await fetch('http://localhost:8080/api/assets/', {
+      const response = await fetch('https://assets-management-system.onrender.com/api/assets/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

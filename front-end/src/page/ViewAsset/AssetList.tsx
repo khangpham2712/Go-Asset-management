@@ -11,7 +11,7 @@ type DataType = {
   name: string;
   category: string;
   status: string;
-  employeeName: string;
+  employeeId: number;
   createdDay: string;
   updatedDay: string;
   actions: ReactNode;
@@ -21,7 +21,7 @@ type AssetDataType = {
   name: string;
   type: string;
   status: string;
-  department_id: number;
+  user_id: number;
   created_at: string;
   updated_at: string;
   actions: ReactNode;
@@ -49,9 +49,9 @@ const columns: ColumnsType<DataType> = [
     key: "status",
   },
   {
-    title: "Department Name",
-    dataIndex: "employeeName",
-    key: "employeeName",
+    title: "Employee ID",
+    dataIndex: "employeeId",
+    key: "employeeId",
   },
   {
     title: "Created Day",
@@ -70,7 +70,7 @@ const columns: ColumnsType<DataType> = [
   },
 ];
 
-const AssetList = (props: { employeeId: number; employeeName: string }) => {
+const AssetList: React.FC<{ employeeId: number}> = ({ employeeId }) => {
   const [data, setData] = useState<AssetDataType[]>([]);
   const [showItems, setShowItems] = useState<DataType[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -83,7 +83,7 @@ const AssetList = (props: { employeeId: number; employeeName: string }) => {
 
   const deleteData = async (assetId: any) => {
     await axios
-      .delete(`http://localhost:8080/api/assets/${assetId}`)
+      .delete(`https://assets-management-system.onrender.com/api/assets/${assetId}`)
       .then(() => {
         setData(
           data.filter((item) => {
@@ -100,7 +100,7 @@ const AssetList = (props: { employeeId: number; employeeName: string }) => {
   const role = localStorage.getItem("role");
 
   const url =
-    "http://localhost:8080/api/assets/?department_id=" + props.employeeId;
+    "https://assets-management-system.onrender.com/api/assets/?user_id=" + employeeId;
 
   useEffect(() => {
     axios
@@ -109,14 +109,15 @@ const AssetList = (props: { employeeId: number; employeeName: string }) => {
         setData(response.data);
       })
       .catch((error: any) => {
-        alert(error);
+        console.log(error);
       });
-  }, [props.employeeId]);
+  }, [employeeId]);
 
   useEffect(() => {
     setShowItems([]);
     data.map((item, index) => {
       const createdDay = item.created_at.substring(0, 10);
+      const updatedDay = item.updated_at.substring(0, 10);
       setShowItems((prevItems) => [
         ...prevItems,
         {
@@ -124,12 +125,12 @@ const AssetList = (props: { employeeId: number; employeeName: string }) => {
           name: item.name,
           category: item.type,
           status: item.status,
-          employeeName: props.employeeName,
-          createdDay: item.name,
-          updatedDay: item.updated_at,
+          employeeId: item.user_id,
+          createdDay: createdDay,
+          updatedDay: updatedDay,
           actions: (
             <div className="more-actions">
-              <Button type="primary" onClick={() => handleClick(item.id)} data-testid="view-asset-detail">
+              <Button data-testid="view-asset-detail" type="primary" onClick={() => handleClick(item.id)}>
                 View
               </Button>
               <Popconfirm
@@ -160,7 +161,7 @@ const AssetList = (props: { employeeId: number; employeeName: string }) => {
   }, [data]);
 
   return (
-    <>
+    <div data-testid="asset-list">
       <div className="AssetList">
         <div className="AssetList--table">
           <Table columns={columns} dataSource={showItems} id="asset-list"/>
@@ -169,11 +170,11 @@ const AssetList = (props: { employeeId: number; employeeName: string }) => {
       {isModalOpen && (
         <AssetDetail
           assetId={assetId}
-          employeeName={props.employeeName}
+          employeeName={employeeId}
           setIsModalOpen={setIsModalOpen}
         />
       )}
-    </>
+    </div>
   );
 };
 

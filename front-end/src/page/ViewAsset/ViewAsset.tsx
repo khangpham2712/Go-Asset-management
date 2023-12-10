@@ -1,76 +1,70 @@
 import { Select, Button } from 'antd';
-import { ReactNode, useEffect, useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import './ViewAsset.css';
 import AssetList from './AssetList';
-import internal from 'stream';
 import AddAsset from '../AddAsset/AddAsset';
 import { PlusOutlined } from '@ant-design/icons';
 import {Header } from '../../components/Header/Header';
-import axios from 'axios';
 
-type DepartmentDataType = {
-  Id: number;
-  Name: string;
+type EmployeeDataType = {
+  id: number;
+  username: string;
+  password: string;
+  login: boolean;
+  role: number;
+  telephone: string;
+  dname: string;
 };
 
 const ViewAsset = () => {
   const role = localStorage.getItem("role");
-  const intialemployeeId = localStorage.getItem("id");
-  const intialemployeeName = localStorage.getItem("name");
+  const intialEmployeeId = localStorage.getItem("id");
 
-  // const [Department, setDepartment] = useState<string>((intialDepartment === null) ? 'vi' : intialDepartment);
+  const [employees, setEmployees] = useState<EmployeeDataType[]>([]);
+  const [employeeOption, setEmployeeOption] = useState<{ label: string; value: string, id: number }[]>([]);
+  const [employeeId, setEmployeeId] = useState<number>(0);
 
-  const [departments, setDepartments] = useState<DepartmentDataType[]>([]);
-  const [departmentOption, setDepartmentOption] = useState<{ label: string; value: string, id: number }[]>([]);
-  const [department, setDepartment] = useState<{id: number, name: string}>({id: 0, name: ""});
-  // const [department, setDepartment] = useState<{id: number, name: string}>((intialemployeeId === null && intialemployeeName === null) ? {id: 0, name: ""} : {id: parseInt(intialemployeeId), name: intialemployeeName});
-  const url = 'http://localhost:8080/api/departments/';
-  // useEffect(() =>
-  // {
-  //     localStorage.setItem('MYAPP_DEPARTMENT', Department);
-  // }, [Department]);
+  const url = 'https://assets-management-system.onrender.com/api/users/';
+
   useEffect(() => {
-    // axios
-    //   .get(url)
-    //   .then((response: { data: DepartmentDataType[] }) => {
-    //     setDepartments(response.data);
-    //   })
-    //   .catch((error: any) => {
-    //     alert(error);
-    //   });
-  }, [department]);
+    axios
+      .get(url)
+      .then((response: { data: EmployeeDataType[] }) => {
+        setEmployees(response.data);
+      })
+      .catch((error: any) => {
+        // console.log(error);
+      });
+  }, [employeeId]);
 
   useEffect(() => {
     if (role === "1") {
-      const intialDepartment = departments.find(
-        (items) => items.Id.toString() === intialemployeeId
-      );
-      // console.log(intialDepartment)
-      if (intialDepartment)
-        setDepartment({ id: intialDepartment.Id, name: intialDepartment.Name });
+      if (intialEmployeeId)
+      setEmployeeId(parseInt(intialEmployeeId));
     } else if (role === "0") {
-      setDepartmentOption([]);
-      departments.map((item) => {
-        setDepartmentOption([
-          ...departmentOption,
+      setEmployeeOption([]);
+      employees.map((item) => {
+        setEmployeeOption([
+          ...employeeOption,
           {
-            label: item.Name,
-            value: item.Name,
-            id: item.Id,
+            label: item.username,
+            value: item.username,
+            id: item.id,
           },
         ]);
       });
     }
-  }, [departments]);
-
+  }, [employees]);
+console.log(employees);
   const onChange = (value: string, option: any) => {
-    setDepartment({ id: option.id, name: option.value });
+    setEmployeeId(option.id);
   };
 
   // Filter `option.label` match the user type `input`
   const filterOption = (
     input: string,
-    option?: { label: string; value: string; id: number }
+    option?: any
   ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -80,28 +74,34 @@ const ViewAsset = () => {
     };
 
     return (
-        <div className="Viewasset"> 
+        <div className="Viewasset" data-testid="view-asset"> 
             <Header />
             <div className="Viewasset--container">
-            {role === "1" ? <p>{department.name} Department</p> : <></>}
+            {role === "1" ? <p data-testid="employee-role">Employee ID: {employeeId}</p> : <></>}
             <div className={`Viewasset--header__${role === "0" ? `manager` : `department`}`}>
                 <Select
+                    data-testid="manager-role"
                     className='Viewasset--select'
                     showSearch
-                    placeholder="Select department"
+                    placeholder="Search Employee ID"
                     optionFilterProp="children"
                     onChange={onChange}
                     filterOption={filterOption}
-                    options={departments.map(item => ({
-                      label: item.Name, 
-                      value: item.Name,
-                      id: item.Id,
-                    }))}
+                    options={employees.map(item => {
+                        if(item.role === 0) {
+                          return {
+                            label: item.id.toString(), 
+                            value: item.id.toString(),
+                            id: item.id,
+                          }
+                        }
+                        else return {}
+                    })}
                 />
-                <Button data-testid="btn-add-asset" type="primary" className='Viewasset--button' onClick={handleClick}>Add asset <PlusOutlined /></Button>
+                <Button type="primary" className='Viewasset--button' onClick={handleClick} data-testid="btn-add-asset">Add asset <PlusOutlined /></Button>
                 {isModalOpen && <AddAsset setIsModalOpen={setIsModalOpen}/>}
             </div>
-            <AssetList employeeId={department.id} employeeName={department.name} />
+            <AssetList employeeId={employeeId} />
             </div>
         </div>
     );
