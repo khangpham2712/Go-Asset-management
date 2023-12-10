@@ -11,7 +11,7 @@ import {Header } from '../../components/Header/Header';
 type DepartmentDataType = {
   Id: number;
   Name: string;
-}
+};
 
 const ViewAsset = () => {
   const role = localStorage.getItem("role");
@@ -31,45 +31,53 @@ const ViewAsset = () => {
   //     localStorage.setItem('MYAPP_DEPARTMENT', Department);
   // }, [Department]);
   useEffect(() => {
-    axios.get(url).then((response: { data: DepartmentDataType[] }) => {
-      setDepartments(response.data);
-    }).catch((error: any) => {
-      // alert(error);
-    });
+    axios
+      .get(url)
+      .then((response: { data: DepartmentDataType[] }) => {
+        setDepartments(response.data);
+      })
+      .catch((error: any) => {
+        alert(error);
+      });
   }, [department]);
 
   useEffect(() => {
-    if(role === "1"){
-      const intialDepartment = departments.find(items => items.Id.toString() === intialDepartmentId);
-      if(intialDepartment) setDepartment({id: intialDepartment.Id, name: intialDepartment.Name});
-    }
-    else if(role === "0"){
+    if (role === "1") {
+      const intialDepartment = departments.find(
+        (items) => items.Id.toString() === intialDepartmentId
+      );
+      if (intialDepartment)
+        setDepartment({ id: intialDepartment.Id, name: intialDepartment.Name });
+    } else if (role === "0") {
       setDepartmentOption([]);
       departments.map((item) => {
-      setDepartmentOption([...departmentOption, {
-          label: item.Name,
-          value: item.Name,
-          id: item.Id,}])
-      })}
+        setDepartmentOption([
+          ...departmentOption,
+          {
+            label: item.Name,
+            value: item.Name,
+            id: item.Id,
+          },
+        ]);
+      });
+    }
   }, [departments]);
 
-
   const onChange = (value: string, option: any) => {
-    setDepartment({id: option.id, name: option.value});
+    setDepartment({ id: option.id, name: option.value });
   };
-  
+
   // Filter `option.label` match the user type `input`
-  const filterOption = (input: string, option?: { label: string; value: string, id: number }) =>
-    (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
-  
-    
-    const [isModalOpen, setIsModalOpen] = useState(false);
+  const filterOption = (
+    input: string,
+    option?: { label: string; value: string; id: number }
+  ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleClick = () => {
       setIsModalOpen(true);
     };
-    // console.log(isModalOpen)
-  
 
     return (
         <div className="Viewasset"> 
@@ -78,7 +86,6 @@ const ViewAsset = () => {
             {role === "1" ? <p>{department.name} Department</p> : <></>}
             <div className={`Viewasset--header__${role === "0" ? `manager` : `department`}`}>
                 <Select
-                    id="department-select"
                     className='Viewasset--select'
                     showSearch
                     placeholder="Select department"
@@ -91,7 +98,7 @@ const ViewAsset = () => {
                       id: item.Id,
                     }))}
                 />
-                <Button data-testid="btn-add-asset" type="primary" className='Viewasset--button' onClick={handleClick}>Add asset <PlusOutlined /></Button>
+                <Button type="primary" className='Viewasset--button' onClick={handleClick}>Add asset <PlusOutlined /></Button>
                 {isModalOpen && <AddAsset setIsModalOpen={setIsModalOpen}/>}
             </div>
             <AssetList departmentId={department.id} departmentName={department.name} />
