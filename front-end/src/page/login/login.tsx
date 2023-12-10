@@ -51,7 +51,7 @@ const Login = () => {
 
     try {
       // Make a POST request to your login API endpoint
-      const response = await fetch('http://localhost:8080/api/auth/login', {
+      const response = await fetch('https://assets-management-system.onrender.com/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
