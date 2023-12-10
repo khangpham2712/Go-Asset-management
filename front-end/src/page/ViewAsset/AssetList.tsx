@@ -83,7 +83,7 @@ const AssetList: React.FC<{ employeeId: number}> = ({ employeeId }) => {
 
   const deleteData = async (assetId: any) => {
     await axios
-      .delete(`http://localhost:8080/api/assets/${assetId}`)
+      .delete(`https://assets-management-system.onrender.com/api/assets/${assetId}`)
       .then(() => {
         setData(
           data.filter((item) => {
@@ -100,13 +100,14 @@ const AssetList: React.FC<{ employeeId: number}> = ({ employeeId }) => {
   const role = localStorage.getItem("role");
 
   const url =
-    "http://localhost:8080/api/assets/?user_id=" + employeeId;
+    "https://assets-management-system.onrender.com/api/assets/?user_id=" + employeeId;
 
   useEffect(() => {
     axios
       .get(url)
       .then((response) => {
         setData(response.data);
+        console.log(data);
       })
       .catch((error: any) => {
         console.log(error);

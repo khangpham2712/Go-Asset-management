@@ -39,14 +39,14 @@ const AssestDetail = (props: any) => {
 
   const loadData = async () => {
     const response = await axios.get(
-      `http://localhost:8080/api/assets/${props.assetId}`
+      `https://assets-management-system.onrender.com/api/assets/${props.assetId}`
     ) 
     .then((response) => {
       setData(response.data);
       setTmpdata(response.data);
     })
     .catch((error: any) => {
-      alert(error.response.data.error);
+      alert("Not found");
     });
   };
 
@@ -94,7 +94,7 @@ const AssestDetail = (props: any) => {
 
   const updateAsset = async (body: any) => {
     const response = await axios.put(
-      `http://localhost:8080/api/assets/${props.assetId}`,
+      `https://assets-management-system.onrender.com/api/assets/${props.assetId}`,
       {
         ...body
       }
@@ -104,6 +104,7 @@ const AssestDetail = (props: any) => {
     })
     .catch((err) => {
       // console.log('Theres some error on calling api: ', err)
+      alert("Not found");
     })
   }
 
