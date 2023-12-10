@@ -6,26 +6,18 @@
 /* eslint-disable testing-library/no-unnecessary-act */
 /* eslint-disable testing-library/prefer-screen-queries */
 /* eslint-disable testing-library/render-result-naming-convention */
-import React from "react";
 import ReactTestUtils, { act } from "react-dom/test-utils";
 import {
   cleanup,
   fireEvent,
   render,
-  renderHook,
   screen,
   waitFor,
 } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import "@testing-library/jest-dom/extend-expect";
-
 import AssestDetail from "./AssetDetail";
-import ViewAsset from "../ViewAsset/ViewAsset";
-import { Button } from "antd";
 import AssetList from "../ViewAsset/AssetList";
-import Login from "../login/login";
-import axios from "axios";
-import { globalAgent } from "http";
 
 afterEach(() => {
   cleanup();
@@ -142,7 +134,7 @@ describe("Delete-asset-test", () => {
     localStorage.setItem("role", "0");
 
     // 2. User clicks delete button of first asset
-    const a = render(
+    render(
       <AssetList departmentId={departmentId} departmentName={departmentName} />
     );
 
