@@ -6,7 +6,7 @@
 /* eslint-disable testing-library/no-unnecessary-act */
 /* eslint-disable testing-library/prefer-screen-queries */
 /* eslint-disable testing-library/render-result-naming-convention */
-import ReactTestUtils, { act } from "react-dom/test-utils";
+
 import {
   cleanup,
   fireEvent,
