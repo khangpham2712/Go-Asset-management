@@ -19,7 +19,7 @@ type EmployeeDataType = {
 
 const ViewAsset = () => {
   const role = localStorage.getItem("role");
-  const intialEmployeeId = localStorage.getItem("MYAPP_EMPLOYEEID");
+  const intialEmployeeId = localStorage.getItem("id");
 
   const [employees, setEmployees] = useState<EmployeeDataType[]>([]);
   const [employeeOption, setEmployeeOption] = useState<{ label: string; value: string, id: number }[]>([]);
@@ -43,6 +43,8 @@ const ViewAsset = () => {
       if (intialEmployeeId)
       setEmployeeId(parseInt(intialEmployeeId));
     } else if (role === "0") {
+      if (intialEmployeeId)
+      setEmployeeId(parseInt(intialEmployeeId));
       setEmployeeOption([]);
       employees.map((item) => {
         setEmployeeOption([
@@ -56,7 +58,7 @@ const ViewAsset = () => {
       });
     }
   }, [employees]);
-console.log(employees);
+console.log(intialEmployeeId);
   const onChange = (value: string, option: any) => {
     setEmployeeId(option.id);
   };
