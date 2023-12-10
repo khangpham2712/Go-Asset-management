@@ -267,4 +267,56 @@ describe("AddAsset: Interactions", () => {
     
       expect(await screen.findByText("'department_id' is required")).toBeInTheDocument();
     });
+
+    test("8. Missing Status field", async () => {
+      // Open the Add Asset Modal
+      render(<ViewAsset />);
+      const addbtn = await screen.findByTestId("btn-add-asset");
+      fireEvent.click(addbtn);
+    
+      // Do not select a value for Status
+    
+      // Pass value for: Asset name
+      const asset_name = screen.getByLabelText("Name");
+      fireEvent.change(asset_name, { target: { value: 'Table' } });
+      await waitFor(() => {
+        expect(screen.getByLabelText("Name")).toHaveValue("Table");
+      });
+
+      // Select value for: Department
+      const department = screen.getByLabelText("Department")
+      fireEvent.change(department, {target: {value: "1"}})
+      
+      let options = screen.getAllByTestId("department_opt")
+      expect(options[0]).toBeTruthy();
+      expect(options[1]).toBeFalsy();
+      expect(options[2]).toBeFalsy();
+    
+      // Pass value for: Type
+      const asset_type = screen.getByLabelText("Type");
+      fireEvent.change(asset_type, { target: { value: 'Small Table' } });
+      await waitFor(() => {
+        expect(screen.getByLabelText("Type")).toHaveValue("Small Table");
+      });
+    
+      // Pass value for: Description
+      const description = screen.getByLabelText("Description");
+      fireEvent.change(description, { target: { value: 'Some words that make you sound sMaRt' } });
+      await waitFor(() => {
+        expect(screen.getByLabelText("Description")).toHaveValue("Some words that make you sound sMaRt");
+      });
+    
+      // Pass value for: Note
+      const note = screen.getByLabelText("StatusNote");
+      fireEvent.change(note, { target: { value: 'status note' } });
+      await waitFor(() => {
+        expect(screen.getByLabelText("StatusNote")).toHaveValue("status note");
+      });
+    
+      // Click Submit button
+      const submitbtn = await screen.findByText('Submit');
+      fireEvent.click(submitbtn);
+    
+      expect(await screen.findByText("'department_id' is required")).toBeInTheDocument();
+    });
   })
