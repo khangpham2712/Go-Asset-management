@@ -98,7 +98,7 @@ const ViewAsset = () => {
                       id: item.Id,
                     }))}
                 />
-                <Button type="primary" className='Viewasset--button' onClick={handleClick}>Add asset <PlusOutlined /></Button>
+                <Button data-testid="btn-add-asset" type="primary" className='Viewasset--button' onClick={handleClick}>Add asset <PlusOutlined /></Button>
                 {isModalOpen && <AddAsset setIsModalOpen={setIsModalOpen}/>}
             </div>
             <AssetList employeeId={department.id} employeeName={department.name} />
