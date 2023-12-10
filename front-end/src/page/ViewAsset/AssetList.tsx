@@ -1,10 +1,10 @@
 import { Select, Button, Popconfirm, message } from "antd";
 import { Space, Table, Tag } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, SetStateAction, useEffect, useState } from "react";
 import "./ViewAsset.css";
 import AssetDetail from "../AssetDetail/AssetDetail";
-import axios from "axios";
+import axios from 'axios';
 
 type DataType = {
   assetId: number;
@@ -93,19 +93,19 @@ const AssetList: React.FC<{ employeeId: number}> = ({ employeeId }) => {
         message.success('Asset was successfully deleted');
       })
       .catch((error: any) => {
-        alert(error.response.data.error);
+        console.log(error);
       });
   };
 
   const role = localStorage.getItem("role");
 
   const url =
-    "http://localhost:8080/api/assets/?user_id=" + employeeId;
+    "https://assets-management-system.onrender.com/api/assets/?user_id=" + employeeId;
 
   useEffect(() => {
     axios
       .get(url)
-      .then((response) => {
+      .then((response: { data: AssetDataType[] }) => {
         setData(response.data);
       })
       .catch((error: any) => {
@@ -130,7 +130,7 @@ const AssetList: React.FC<{ employeeId: number}> = ({ employeeId }) => {
           updatedDay: updatedDay,
           actions: (
             <div className="more-actions">
-              <Button data-testid="view-asset-detail" type="primary" onClick={() => handleClick(item.id)}>
+              <Button type="primary" onClick={() => handleClick(item.id)} data-testid="view-asset-detail">
                 View
               </Button>
               <Popconfirm
