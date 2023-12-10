@@ -142,7 +142,7 @@ const AssetList = (props: { departmentId: number; departmentName: string }) => {
               >
                 <Button
                   className={`DeleteButton__${
-                    role === "0" ? `manager` : `department`
+                    role === "0" ? `manager` : `employee`
                   }`}
                   type="primary"
                   danger

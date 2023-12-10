@@ -27,13 +27,13 @@ afterEach(() => {
 describe("Delete-asset-test", () => {
   it("should delete asset assigned to an employee successfully when clicking 'yes' with delete button (manager role)", async () => {
     // 1. Set userId (employeeId) = 3, employeeName = "Nguyen An". Using manager role to asset list page
-    let departmentId = 3;
-    let departmentName = "Nguyen An";
+    let employeeId = 3;
+    let employeeName = "Nguyen An";
     localStorage.setItem("role", "0");
 
     // 2. User clicks delete button of first asset
     render(
-      <AssetList departmentId={departmentId} departmentName={departmentName} />
+      <AssetList employeeId={employeeId} employeeName={employeeName} />
     );
 
     const deletebtn = await screen.findAllByTestId("delete-asset");
@@ -60,13 +60,13 @@ describe("Delete-asset-test", () => {
 
   it("should not delete asset assigned to an employee when clicking 'no' with delete button (manager role)", async () => {
     // 1. Set userId (employeeId) = 1, employeeName = "Pham Khang". Using manager role to asset list page
-    let departmentId = 1;
-    let departmentName = "Pham Khang";
+    let employeeId = 1;
+    let employeeName = "Pham Khang";
     localStorage.setItem("role", "0");
 
     // 2. User clicks delete button of first asset
     render(
-      <AssetList departmentId={departmentId} departmentName={departmentName} />
+      <AssetList employeeId={employeeId} employeeName={employeeName} />
     );
 
     const deletebtn = await screen.findAllByTestId("delete-asset");
@@ -91,21 +91,21 @@ describe("Delete-asset-test", () => {
   });
 
   it.each([
-    ["DeleteButton__department", "1"],
+    ["DeleteButton__employee", "1"],
     ["DeleteButton__manager", "0"],
   ])(
     "should set delete button's class %s when user has logined in as employee/manager (role = %s) account",
     async (expected, n) => {
       // 1. Set userId (employeeId) = 1, employeeName = "Pham Khang". Using employee role to asset list page
-      let departmentId = 1;
-      let departmentName = "Pham Khang";
+      let employeeId = 1;
+      let employeeName = "Pham Khang";
       localStorage.setItem("role", n);
-      localStorage.setItem("id", departmentId.toString());
+      localStorage.setItem("id", employeeId.toString());
 
       render(
         <AssetList
-          departmentId={departmentId}
-          departmentName={departmentName}
+          employeeId={employeeId}
+          employeeName={employeeName}
         />
       );
 
