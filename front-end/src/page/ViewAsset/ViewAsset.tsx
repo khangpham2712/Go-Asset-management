@@ -19,7 +19,7 @@ type EmployeeDataType = {
 
 const ViewAsset = () => {
   const role = localStorage.getItem("role");
-  const intialEmployeeId = localStorage.getItem("MYAPP_EMPLOYEEID");
+  const intialEmployeeId = localStorage.getItem("id");
 
   const [employees, setEmployees] = useState<EmployeeDataType[]>([]);
   const [employeeOption, setEmployeeOption] = useState<{ label: string; value: string, id: number }[]>([]);

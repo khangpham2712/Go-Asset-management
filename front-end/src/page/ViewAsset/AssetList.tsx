@@ -125,7 +125,7 @@ const AssetList: React.FC<{ employeeId: number}> = ({ employeeId }) => {
           name: item.name,
           category: item.type,
           status: item.status,
-          employeeId: employeeId,
+          employeeId: item.user_id,
           createdDay: createdDay,
           updatedDay: updatedDay,
           actions: (
