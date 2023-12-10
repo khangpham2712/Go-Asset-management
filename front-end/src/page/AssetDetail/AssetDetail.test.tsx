@@ -26,7 +26,7 @@ afterEach(() => {
 
 describe("Asset-detail-test", () => {
   test("should display first asset's detail assigned to Pham Khang employee (manager role)", async () => {
-    // 1. Set userId (employeeId) = 1, employeeName = "Pham Khang". Using manager role to asset list page
+    // 1. Set userId (employeeId) = 1, employeeName = "Pham Khang". Using manager role to asset list page.
     let departmentId = 1;
     let departmentName = "Pham Khang";
     localStorage.setItem("role", "0");
