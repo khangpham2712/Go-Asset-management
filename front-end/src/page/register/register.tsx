@@ -3,7 +3,7 @@ import React from 'react';
 // import { Button, Checkbox, Form, Input } from 'antd'
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import './register.css'
+import './Register.css'
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -79,40 +79,51 @@ function register() {
         setDepartment(event.target.value as string);
     }
 
+    const [error, setError] = useState<boolean>(false);
+
     const onFinish = async (event: React.FormEvent<HTMLFormElement>) => {
         try {
             event.preventDefault();
             const data = new FormData(event.currentTarget);
 
-            // Make a POST request to your registration API endpoint
-            const response = await fetch('http://localhost:8080/api/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    "Username": data.get('username'),
-                    "Password": data.get('password'),
-                    "Role": parseInt(role, 10),
-                    "Telephone": data.get('phone-number'),
-                    "DName": department
-                }),
-            });
+            if (data.get('username') === '' || data.get('password') === '' || data.get('repeat-password') === '' || role === '') {
+                setError(true);
+            }
+            else if (data.get('password') !== data.get('repeat-password')) {
+                setError(true);
+            }
+            else {
+                // Make a POST request to your registration API endpoint
+                const response = await fetch('https://assets-management-system.onrender.com/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        "Username": data.get('username'),
+                        "Password": data.get('password'),
+                        "Role": parseInt(role, 10),
+                        "Telephone": data.get('phone-number'),
+                        "DName": department
+                    }),
+                });
 
-            // Check if the request was successful (status code 2xx)
-            if (response.ok) {
-                // Registration successful, you can handle the response accordingly
-                console.log('Registration successful');
-                window.location.href = "../login"
+                // Check if the request was successful (status code 2xx)
+                if (response.ok) {
+                    // Registration successful, you can handle the response accordingly
+                    // console.log('Registration successful');
+                    window.location.href = "../login"
 
-            } else {
-                // Registration failed, handle the error response
-                const errorData = await response.json();
-                console.error('Registration failed:', errorData);
+                } else {
+                    // Registration failed, handle the error response
+                    const errorData = await response.json();
+                    // console.error('Registration failed:', errorData);
+                    setError(true);
+                }
             }
         } catch (error) {
             // Handle network or other errors
-            console.error('Error during registration:', error);
+            // console.error('Error during registration:', error);
         }
     };
 
@@ -298,6 +309,7 @@ function register() {
                                         label="Username"
                                         type="username"
                                         id="username"
+                                        data-testid="username"
                                         autoComplete="username"
                                     />
                                 </Grid>
@@ -309,6 +321,7 @@ function register() {
                                         label="Password"
                                         type="password"
                                         id="password"
+                                        data-testid="password"
                                         autoComplete="new-password"
                                     />
                                 </Grid>
@@ -320,6 +333,7 @@ function register() {
                                         label="Repeat Password"
                                         type="password"
                                         id="repeat-password"
+                                        data-testid="repeat-password"
                                         autoComplete="new-password"
                                     />
                                 </Grid>
@@ -330,7 +344,7 @@ function register() {
                                         label="Phone Number"
                                         type="number"
                                         id="phone-number"
-                                        autoComplete="new-password"
+                                        data-testid="phone-number"
                                     />
                                 </Grid>
                                 <Grid item xs={12} md={6}>
@@ -341,6 +355,7 @@ function register() {
                                             id="demo-simple-select"
                                             value={role}
                                             label="Role"
+                                            data-testid="role"
                                             onChange={handleChangeRole}
                                         >
                                             <MenuItem value={0}>Manager</MenuItem>
@@ -356,6 +371,7 @@ function register() {
                                             id="demo-simple-select"
                                             value={department}
                                             label="Department"
+                                            data-testid="department"
                                             // size="small"
                                             onChange={handleChangeDepartment}
                                         >
@@ -365,11 +381,17 @@ function register() {
                                         </Select>
                                     </FormControl>
                                 </Grid>
+                                {error &&
+                                    <Typography data-testid="error" component="p" sx={{ color: "red", pt: '5px', ml: '5px' }}>
+                                        Đăng ký không thành công
+                                    </Typography>
+                                }
                             </Grid>
                             <Button
                                 type="submit"
                                 fullWidth
                                 variant="contained"
+                                data-testid="registerbtn"
                                 sx={{ mt: 3, mb: 2 }}
                             >
                                 Đăng Ký

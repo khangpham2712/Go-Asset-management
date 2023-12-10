@@ -23,7 +23,7 @@ const ViewUser = () => {
     const [getId, setGetId] = useState(0);
 
     // EDIT LINK API HERE 
-    const url = 'http://localhost:8080/api/auth/register';
+    const url = 'https://assets-management-system.onrender.com/api/auth/register';
     useEffect(() => {
         const fetchUsers = async ()=>{
             const response = await fetch(url);
@@ -46,7 +46,7 @@ const ViewUser = () => {
     const handleWhenClickEdit = async () => {  
         if(getId !== 0) {
             // EDIT LINK API HERE 
-            const response = await fetch(`http://localhost:8080/api/auth/register/${getId}`, {
+            const response = await fetch(`https://assets-management-system.onrender.com/api/auth/register/${getId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

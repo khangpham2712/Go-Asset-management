@@ -1,10 +1,10 @@
 import { Select, Button, Popconfirm, message } from "antd";
 import { Space, Table, Tag } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, SetStateAction, useEffect, useState } from "react";
 import "./ViewAsset.css";
 import AssetDetail from "../AssetDetail/AssetDetail";
-import axios from "axios";
+import axios from 'axios';
 
 type DataType = {
   assetId: number;
@@ -105,7 +105,7 @@ const AssetList: React.FC<{ employeeId: number}> = ({ employeeId }) => {
   useEffect(() => {
     axios
       .get(url)
-      .then((response) => {
+      .then((response: { data: AssetDataType[] }) => {
         setData(response.data);
         console.log(data);
       })
