@@ -20,8 +20,10 @@ type UserDataType = {
 
 const ViewUser = () => {
     const [users, setUsers] = useState<UserDataType[]>([]);
-    
-    const url = 'http://localhost:3000/courses';
+    const [getId, setGetId] = useState(0);
+
+    // EDIT LINK API HERE 
+    const url = 'http://localhost:8080/api/auth/register';
     useEffect(() => {
         const fetchUsers = async ()=>{
             const response = await fetch(url);
@@ -36,6 +38,37 @@ const ViewUser = () => {
     const handleClickEdit = (id: any) => {
         document.querySelector('.display-form')?.setAttribute("class", "display-form-show")
         document.querySelector('.body')?.setAttribute("class", "body-opacity")
+
+        // return id sau moi làn click Edit
+        setGetId(id)
+    }
+    
+    const handleWhenClickEdit = async () => {  
+        if(getId !== 0) {
+            // EDIT LINK API HERE 
+            const response = await fetch(`http://localhost:8080/api/auth/register/${getId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    "username": userUpdate?.username, 
+                    "password": userUpdate?.password,
+                    "login": users[getId]?.login,
+                    "role": users[getId]?.role || 0,
+                    "telephone": userUpdate?.telephone,
+                    "dname": userUpdate?.dname,
+                }),
+            });
+            if(response.ok){
+                window.location.href = "../view-user"
+            }
+            else{
+                const errorValue = await response.json();
+                console.error('Failed:', errorValue);
+            }
+            // console.log(getId)  
+        }    
     }
 
     const handleChange = (event: any) => {
@@ -57,52 +90,63 @@ const ViewUser = () => {
 
     return(
         <div className="view-user">
-            <div className="display-form">
-                <form onSubmit={handleUpdate} className='form-update-user' >
-                    <h3 className="header-form">Update user</h3>
-                    <br />
-                    <label className="header-form-label">Username:
-                    <input 
-                        className="header-form-input"
-                        type="text" 
-                        name="username" 
-                        value={userUpdate.username || ""} 
-                        onChange={handleChange}
-                        />
-                    </label>
-                    <br />
-                    <label className="header-form-label">Password:
-                    <input 
-                        className="header-form-input"
-                        type="text" 
-                        name="password" 
-                        value={userUpdate.password || 0} 
-                        onChange={handleChange}
-                        />
-                    </label>
-                    <br />
-                    <label className="header-form-label">Telephone:
-                    <input  
-                        className="header-form-input"
-                        type="text" 
-                        name="telephone" 
-                        value={userUpdate.telephone || 0} 
-                        onChange={handleChange}
-                        />
-                    </label>
-                    <br />
-                    <label className="header-form-label">Description:
-                    <input  
-                        className="header-form-input"
-                        type="text" 
-                        name="dname" 
-                        value={userUpdate.dname || ""} 
-                        onChange={handleChange}
-                        />
-                    </label>
-                    <br />
-                    <input className="header-form-submit" type="submit" />
-                </form>
+            <div className="display-form">                
+
+                <div className="form-container">
+                    <h1 className="form-title">Edit User</h1>
+                    <form action="#">
+                        <div className="main-user-info">
+                            <div className="user-input-box">
+                                <label htmlFor="username">Username</label>
+                                <input 
+                                    type="text" 
+                                    id="username" 
+                                    name="username" 
+                                    placeholder="Edit Username" 
+                                    value={userUpdate.username || ""} 
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="user-input-box">
+                                <label htmlFor="password">Password</label>
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    placeholder="Edit Password" 
+                                    value={userUpdate.password || ""} 
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="user-input-box">
+                                <label htmlFor="telephone">Phone Number</label>
+                                <input 
+                                    type="text" 
+                                    id="telephone" 
+                                    name="telephone" 
+                                    placeholder="Enter Phone Number" 
+                                    value={userUpdate.telephone || ""} 
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="user-input-box">
+                                <label htmlFor="dname">Department</label>
+                                <input 
+                                    type="text" 
+                                    id="dname" 
+                                    name="dname" 
+                                    placeholder="Edit Department"  
+                                    value={userUpdate.dname || ""} 
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        </div>
+                        <div className="form-submit-btn">
+                            <input onClick={() => handleWhenClickEdit()} type="submit" value="Update"/>
+                        </div>
+                    </form>
+                </div>
+
             </div>
 
             <div className="heading">
@@ -132,10 +176,10 @@ const ViewUser = () => {
                             <div className="body__phoneName-user">
                                 <div className='body__phone-user-key'>
                                     <FontAwesomeIcon icon={faKey} />
-                                    <p className="phone-user">{user.password}</p>
+                                    <p className="phone-user-pass">{user.password}</p>
                                 </div>
                                 <div className='body__phone-user-access'>
-                                    <p className="phone-user">Login: {user.login}</p>
+                                    <p className="phone-user">Login: {user?.login || 0}</p>
                                     <p className="phone-user">Role: {user.role}</p>
                                 </div>
                             </div>
@@ -154,45 +198,6 @@ const ViewUser = () => {
 
                 ))}
 
-                {/* <div className="body__component-user">
-                    <div className='body__component-user1'>
-                        <div className="body__img-user">
-                            <FontAwesomeIcon icon={faCircleUser} />
-                        </div>
-                        <div className="body__phoneName-user">
-                            <p className="name-user">tranvanhoang</p>
-                            <div className='body__phone-user'>
-                                <FontAwesomeIcon icon={faPhone} />
-                                <p className="phone-user">0908030104</p>
-                            </div>
-                        </div>
-                        <div className="body__line"></div>
-                        <div className="body__phoneName-user">
-                            <div className='body__phone-user-key'>
-                                <FontAwesomeIcon icon={faKey} />
-                                <p className="phone-user">0908030104</p>
-                            </div>
-                            <div className='body__phone-user-access'>
-                                <p className="phone-user">Login: 1</p>
-                                <p className="phone-user">Role: 0</p>
-                            </div>
-                        </div>
-                        <div className="body__line"></div>
-                        <div className="body__info-user">
-                            <FontAwesomeIcon icon={faComments} />
-                            <p className="info-user">Information technology</p>
-                        </div>
-                    </div>
-                    <div>
-                        <button className='body__view-user-btn'>Update</button>
-                    </div>
-
-                </div> */}
-
-                {/* <div className="body__component-user"></div>
-                <div className="body__component-user"></div>
-                <div className="body__component-user"></div>
-                <div className="body__component-user"></div> */}
             </div>
         </div>
 
