@@ -100,7 +100,7 @@ const AssetList: React.FC<{ employeeId: number}> = ({ employeeId }) => {
   const role = localStorage.getItem("role");
 
   const url =
-    "http://localhost:8080/api/assets/?user_id=" + employeeId;
+    "https://assets-management-system.onrender.com/api/assets/?user_id=" + employeeId;
 
   useEffect(() => {
     axios

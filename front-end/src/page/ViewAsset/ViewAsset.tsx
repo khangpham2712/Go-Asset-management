@@ -23,9 +23,9 @@ const ViewAsset = () => {
 
   const [employees, setEmployees] = useState<EmployeeDataType[]>([]);
   const [employeeOption, setEmployeeOption] = useState<{ label: string; value: string, id: number }[]>([]);
-  const [employeeId, setEmployeeId] = useState<number>(0);
+  const [employeeId, setEmployeeId] = useState<number>((role === "1" && intialEmployeeId) ? parseInt(intialEmployeeId) : 0);
 
-  const url = 'http://localhost:8080/api/users/';
+  const url = 'https://assets-management-system.onrender.com/api/users/';
 
   useEffect(() => {
     axios
