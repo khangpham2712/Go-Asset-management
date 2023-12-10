@@ -2,7 +2,7 @@ import React from 'react';
 // import { Button, Checkbox, Form, Input } from 'antd'
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import './login.css'
+import './Login.css'
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -38,7 +38,7 @@ const Login = () => {
   //   // (res.status === 200) ? window.location.href = "../" : setLoginErr(true);
   //   // console.log('Success:', info);
   // };
-  const nav: any = useNavigate()
+  // const nav: any = useNavigate()
 
   // if (loginState) {
   //   nav('/home')
@@ -67,19 +67,19 @@ const Login = () => {
       else if (response.ok) {
         // Login successful, you can handle the response accordingly
         const userData = await response.json();
-        console.log('Login successful. User data:', userData);
+        // console.log('Login successful. User data:', userData);
         localStorage.setItem('role', userData.Role);
         localStorage.setItem('id', userData.Id);
         window.location.href = "../view-asset"
       } else {
         // Login failed, handle the error response
         const errorData = await response.json();
-        console.error('Login failed:', errorData);
+        // console.error('Login failed:', errorData);
         setLoginErr('invalid');
       }
     } catch (error) {
       // Handle network or other errors
-      console.error('Error during login:', error);
+      // console.error('Error during login:', error);
       setLoginErr('invalid');
     }
   };
@@ -216,6 +216,7 @@ const Login = () => {
                 label="Username"
                 name="username"
                 autoComplete="username"
+                data-testid="username"
                 autoFocus
               />
               <TextField
@@ -226,28 +227,30 @@ const Login = () => {
                 label="Password"
                 type="password"
                 id="password"
+                data-testid="password"
                 autoComplete="current-password"
               />
               {loginErr === 'invalid' ?
-                <Typography component="p" sx={{ color: "red" }}>
+                <Typography data-testid="error" component="p" sx={{ color: "red" }}>
                   Đăng nhập thất bại: Sai tên tài khoản hoặc mật khẩu
                 </Typography>
                 : null
               } {loginErr === 'unfilled' ?
-                <Typography component="p" sx={{ color: "red" }}>
+                <Typography data-testid="error" component="p" sx={{ color: "red" }}>
                   Vui lòng điền đủ tài khoản và mật khẩu
                 </Typography>
                 : null
               }
-              <FormControlLabel
+              {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Duy trì đăng nhập"
-              />
+              /> */}
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                data-testid="loginbtn"
               >
                 Đăng nhập
               </Button>
