@@ -7,7 +7,7 @@ import ViewAsset from '../ViewAsset/ViewAsset';
 import AssestDetail from "../AssetDetail/AssetDetail";
 
 
-describe("AddAsset: Interactions", () => {
+describe("AddAsset", () => {
     test("1. Add asset Modal can't be opened when the Add asset button isn't clicked", async () => {
       render(<ViewAsset />)
 

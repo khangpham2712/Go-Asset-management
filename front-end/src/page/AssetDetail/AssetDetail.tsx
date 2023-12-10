@@ -39,7 +39,7 @@ const AssestDetail = (props: any) => {
 
   const loadData = async () => {
     const response = await axios.get(
-      `http://localhost:8080/api/assets/${props.assetId}`
+      `https://assets-management-system.onrender.com/api/assets/${props.assetId}`
     ) 
     .then((response) => {
       setData(response.data);
@@ -57,7 +57,7 @@ const AssestDetail = (props: any) => {
   useEffect(() => {
     const getDepartments = async () => {
       // const response = await axios.get(
-      //   `http://localhost:8080/api/departments/`
+      //   `https://assets-management-system.onrender.com/api/departments/`
       // ).then(response => {
       //   setDepartments(response.data)
 
@@ -94,7 +94,7 @@ const AssestDetail = (props: any) => {
 
   const updateAsset = async (body: any) => {
     const response = await axios.put(
-      `http://localhost:8080/api/assets/${props.assetId}`,
+      `https://assets-management-system.onrender.com/api/assets/${props.assetId}`,
       {
         ...body
       }

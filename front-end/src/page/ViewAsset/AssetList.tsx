@@ -83,7 +83,7 @@ const AssetList: React.FC<{ employeeId: number}> = ({ employeeId }) => {
 
   const deleteData = async (assetId: any) => {
     await axios
-      .delete(`http://localhost:8080/api/assets/${assetId}`)
+      .delete(`https://assets-management-system.onrender.com/api/assets/${assetId}`)
       .then(() => {
         setData(
           data.filter((item) => {
