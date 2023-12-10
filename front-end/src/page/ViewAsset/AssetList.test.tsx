@@ -31,42 +31,42 @@ import ViewAsset from './ViewAsset';
 jest.mock('axios');
 
 describe('AssetList component', () => {
+    const mockData = [
+        {
+          id: 1,
+          name: 'Asset 1',
+          type: 'Type 1',
+          status: 'Status 1',
+          status_note: "ok",
+          description: "ok",
+          user_id: 1,
+          created_at: '2023-12-09T21:06:29+07:00',
+          updated_at: '2023-12-09T21:06:29+07:00',
+        },
+        {
+          id: 2,
+          name: 'Asset 2',
+          type: 'Type 2',
+          status: 'Status 2',
+          status_note: "ok",
+          description: "ok",
+          user_id: 2,
+          created_at: '2023-12-09T21:06:29+07:00',
+          updated_at: '2023-12-09T21:06:29+07:00',
+        },
+        {
+          id: 3,
+          name: 'Asset 3',
+          type: 'Type 3',
+          status: 'Status 3',
+          status_note: "ok",
+          description: "ok",
+          user_id: 2,
+          created_at: '2023-12-09T21:06:29+07:00',
+          updated_at: '2023-12-09T21:06:29+07:00',
+        },
+      ];
     it('All assets are displayed when role is 0 (manager)', async () => {
-        const mockData = [
-          {
-            id: 1,
-            name: 'Asset 1',
-            type: 'Type 1',
-            status: 'Status 1',
-            status_note: "ok",
-            description: "ok",
-            user_id: 1,
-            created_at: '2023-12-09T21:06:29+07:00',
-            updated_at: '2023-12-09T21:06:29+07:00',
-          },
-          {
-            id: 2,
-            name: 'Asset 2',
-            type: 'Type 2',
-            status: 'Status 2',
-            status_note: "ok",
-            description: "ok",
-            user_id: 2,
-            created_at: '2023-12-09T21:06:29+07:00',
-            updated_at: '2023-12-09T21:06:29+07:00',
-          },
-          {
-            id: 3,
-            name: 'Asset 3',
-            type: 'Type 3',
-            status: 'Status 3',
-            status_note: "ok",
-            description: "ok",
-            user_id: 2,
-            created_at: '2023-12-09T21:06:29+07:00',
-            updated_at: '2023-12-09T21:06:29+07:00',
-          },
-        ];
         localStorage.setItem('role', '0');
 
         jest.spyOn(axios, 'get').mockResolvedValueOnce({
@@ -83,7 +83,10 @@ describe('AssetList component', () => {
         });
       });
 
-  it('renders asset list correctly', async () => {
+    it('Renders asset list according to the employeeId the manager has chosen', async () => {
+        
+    });
+  it('Renders asset list correctly', async () => {
     const mockData = [
       {
         id: 1,

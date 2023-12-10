@@ -14,15 +14,18 @@ import {
     screen,
     waitFor,
   } from "@testing-library/react";
-  import "@testing-library/jest-dom";
-  import "@testing-library/jest-dom/extend-expect";
-  import ViewAsset from "./ViewAsset";
+    import "@testing-library/jest-dom";
+    import "@testing-library/jest-dom/extend-expect";
+    import ViewAsset from "./ViewAsset";
+    import axios from "axios";
   
   afterEach(() => {
     cleanup();
     jest.clearAllMocks();
   });
-  
+
+  jest.mock('axios');
+
   describe('ViewAsset component',  () => {
     it('renders without error', async () => {
       render(<ViewAsset />);
@@ -42,5 +45,39 @@ import {
       expect(screen.getByTestId('manager-role')).toBeInTheDocument();
     });
   
-  
+    it('can select employeeId from select input', async () => {
+        localStorage.setItem('role', '0');
+        const mockData = [
+            {
+              "id": 1,
+              "username": "khangpham",
+              "password": "",
+              "login": false,
+              "role": 0,
+              "telephone": "",
+              "dname": "Information technology"
+            },
+            {
+              "id": 2,
+              "username": "ngoctieu",
+              "password": "",
+              "login": false,
+              "role": 0,
+              "telephone": "",
+              "dname": "Human resource"
+            }
+        ];
+        jest.spyOn(axios, 'get').mockResolvedValueOnce({
+            data: mockData
+        });
+        render(<ViewAsset />);
+        const selectComponent = screen.getByTestId('manager-role')
+        expect(selectComponent).toBeInTheDocument();
+        expect(selectComponent).toHaveTextContent('1');
+        expect(selectComponent).toHaveTextContent('1');
+      });
+
+    it('Renders asset list according to the employeeId the manager has chosen', async () => {
+        
+    });
   }); 
