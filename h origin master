@@ -1,0 +1,106 @@
+[33mcommit 36c1cc1f3106f17572ee9a410616935e2b7fdfc1[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/FE[m[33m, [m[1;32mFE[m[33m)[m
+Author: ngoc17to <ngoc81nh@gmail.com>
+Date:   Thu Nov 30 16:04:50 2023 +0700
+
+    update UI
+
+[33mcommit 1d399423a3e7f03a26146b010e801c7a94bff525[m
+Merge: 3823b41 1aa15bf
+Author: ngoc17to <ngoc81nh@gmail.com>
+Date:   Sat Nov 11 13:08:16 2023 +0700
+
+    Merge branch 'FE' of https://github.com/khangpham2712/Go-Asset-management into FE
+
+[33mcommit 3823b413ea09c087ac4d3546b2be12fb5bcf9f09[m
+Author: ngoc17to <ngoc81nh@gmail.com>
+Date:   Sat Nov 11 13:07:48 2023 +0700
+
+    done
+
+[33mcommit 1aa15bfac675eb3b96102f5481cc8c130d112f4e[m
+Merge: f9ecf70 e48c40f
+Author: Chau Nguyen <chau.nguyen1506@hcmut.edu.vn>
+Date:   Sat Nov 11 12:53:05 2023 +0700
+
+    Merge branch 'FE' of https://github.com/khangpham2712/Go-Asset-management into FE
+
+[33mcommit f9ecf70b94b5ab059c69aeb691a3a4a224b31b7c[m
+Author: Chau Nguyen <chau.nguyen1506@hcmut.edu.vn>
+Date:   Sat Nov 11 12:51:07 2023 +0700
+
+    Add new asset
+
+[33mcommit e48c40ff719b38c1b8ed61d78122181a3f120dab[m
+Author: ngoc17to <ngoc81nh@gmail.com>
+Date:   Sat Nov 11 11:45:06 2023 +0700
+
+    merge ngoc
+
+[33mcommit c96f8ea9ca9fd9385e0611402988392a7246a8cd[m
+Author: Chau Nguyen <chau.nguyen1506@hcmut.edu.vn>
+Date:   Sat Nov 11 11:22:05 2023 +0700
+
+    Delete asset
+
+[33mcommit da1055ed24ff496dc0f09d2b25ebed9b98946925[m
+Merge: e0af3c9 0af660f
+Author: Love Bokuto So Much <80210084+thaingoctieu@users.noreply.github.com>
+Date:   Sat Nov 11 10:36:34 2023 +0700
+
+    Merge pull request #5 from khangpham2712/merge_register_login
+    
+    merge register login
+
+[33mcommit 0af660fe379e8645375dca852bc4fec41c6e032d[m[33m ([m[1;31morigin/merge_register_login[m[33m)[m
+Author: Tieu Ngoc <medigo.ngoc.tieu@gmail.com>
+Date:   Sat Nov 11 10:35:42 2023 +0700
+
+    merge register login
+
+[33mcommit e0af3c96b927de19a4d313cd87205de376a6a5a8[m
+Author: Chau Nguyen <chau.nguyen1506@hcmut.edu.vn>
+Date:   Sat Nov 11 00:41:21 2023 +0700
+
+    fetch api for asset detail
+
+[33mcommit 4c4f3aec0dd6632a54c8381176c170888d735ac4[m
+Author: ngoc17to <ngoc81nh@gmail.com>
+Date:   Sat Nov 11 00:01:27 2023 +0700
+
+    view assest by department
+
+[33mcommit 2068cbb8a1336b5d5ea377afc519106b06991505[m
+Author: Chau Nguyen <chau.nguyen1506@hcmut.edu.vn>
+Date:   Fri Nov 10 13:19:46 2023 +0700
+
+    Feature View Asset Detail
+
+[33mcommit 5feefd69a826c2214be0853feb6a85b4079bad83[m
+Author: ngoc17to <ngoc81nh@gmail.com>
+Date:   Sat Nov 4 14:44:42 2023 +0700
+
+    view asset
+
+[33mcommit 5abb83a59a73c53a2403c0a8e263e573dee41c8a[m
+Author: ngoc17to <ngoc81nh@gmail.com>
+Date:   Sat Nov 4 13:33:55 2023 +0700
+
+    add ant
+
+[33mcommit f5cfdecfc159256d53e8d7d351f483799763458e[m
+Author: Tieu Ngoc <medigo.ngoc.tieu@gmail.com>
+Date:   Sat Nov 4 11:17:38 2023 +0700
+
+    init frontend
+
+[33mcommit 1ccd3a22a0ae4d488d5db135ed60678021714c76[m
+Author: Khang Pham <michael27122000@gmail.com>
+Date:   Sat Nov 4 10:57:21 2023 +0700
+
+    init
+
+[33mcommit b1cd28ef2a15d290482ec7c88d0f180426a10a3a[m
+Author: Khang Pham <michael27122000@gmail.com>
+Date:   Sat Nov 4 10:53:23 2023 +0700
+
+    init

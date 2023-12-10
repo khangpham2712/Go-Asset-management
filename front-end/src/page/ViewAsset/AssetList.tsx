@@ -11,7 +11,7 @@ type DataType = {
   name: string;
   category: string;
   status: string;
-  departmentName: string;
+  employeeId: number;
   createdDay: string;
   updatedDay: string;
   actions: ReactNode;
@@ -21,7 +21,7 @@ type AssetDataType = {
   name: string;
   type: string;
   status: string;
-  department_id: number;
+  user_id: number;
   created_at: string;
   updated_at: string;
   actions: ReactNode;
@@ -49,9 +49,9 @@ const columns: ColumnsType<DataType> = [
     key: "status",
   },
   {
-    title: "Department Name",
-    dataIndex: "departmentName",
-    key: "departmentName",
+    title: "Employee ID",
+    dataIndex: "employeeId",
+    key: "employeeId",
   },
   {
     title: "Created Day",
@@ -70,7 +70,7 @@ const columns: ColumnsType<DataType> = [
   },
 ];
 
-const AssetList = (props: { departmentId: number; departmentName: string }) => {
+const AssetList: React.FC<{ employeeId: number}> = ({ employeeId }) => {
   const [data, setData] = useState<AssetDataType[]>([]);
   const [showItems, setShowItems] = useState<DataType[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -93,14 +93,14 @@ const AssetList = (props: { departmentId: number; departmentName: string }) => {
         message.success('Asset was successfully deleted');
       })
       .catch((error: any) => {
-        alert(error);
+        console.log(error);
       });
   };
 
   const role = localStorage.getItem("role");
 
   const url =
-    "http://localhost:8080/api/assets/?employee_id=" + props.departmentId;
+    "http://localhost:8080/api/assets/?user_id=" + employeeId;
 
   useEffect(() => {
     axios
@@ -109,14 +109,15 @@ const AssetList = (props: { departmentId: number; departmentName: string }) => {
         setData(response.data);
       })
       .catch((error: any) => {
-        alert(error);
+        console.log(error);
       });
-  }, [props.departmentId]);
+  }, [employeeId]);
 
   useEffect(() => {
     setShowItems([]);
     data.map((item, index) => {
       const createdDay = item.created_at.substring(0, 10);
+      const updatedDay = item.updated_at.substring(0, 10);
       setShowItems((prevItems) => [
         ...prevItems,
         {
@@ -124,9 +125,9 @@ const AssetList = (props: { departmentId: number; departmentName: string }) => {
           name: item.name,
           category: item.type,
           status: item.status,
-          departmentName: props.departmentName,
-          createdDay: item.name,
-          updatedDay: item.updated_at,
+          employeeId: employeeId,
+          createdDay: createdDay,
+          updatedDay: updatedDay,
           actions: (
             <div className="more-actions">
               <Button type="primary" onClick={() => handleClick(item.id)} id="view-asset-detail">
@@ -159,7 +160,7 @@ const AssetList = (props: { departmentId: number; departmentName: string }) => {
   }, [data]);
 
   return (
-    <>
+    <div data-testid="asset-list">
       <div className="AssetList">
         <div className="AssetList--table">
           <Table columns={columns} dataSource={showItems} id="asset-list"/>
@@ -168,11 +169,11 @@ const AssetList = (props: { departmentId: number; departmentName: string }) => {
       {isModalOpen && (
         <AssetDetail
           assetId={assetId}
-          employeeName={props.departmentName}
+          employeeName={employeeId}
           setIsModalOpen={setIsModalOpen}
         />
       )}
-    </>
+    </div>
   );
 };
 

@@ -53,7 +53,7 @@ const AssestDetail = (props: any) => {
         footer={null}
       >
         <div className="modal-sub-title">{data.id}</div>
-        <div className="assest-wrapper">
+        <div className="assest-wrapper" data-testid="asset-detail">
           <div className="assest-container">
             <div className="subcontainer-title">
               <div>Category</div>

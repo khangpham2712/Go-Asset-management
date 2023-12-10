@@ -1,0 +1,22 @@
+name: Unit Tests
+on:
+  push:
+    branches: [view-asset-test]
+  pull_request:
+    branches: [view-asset-test]
+jobs:
+  say-hello:
+    build: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "1.20"
+
+      - name: npm install
+        run: npm ci
+
+      - name: Run test
+        run: npm test
