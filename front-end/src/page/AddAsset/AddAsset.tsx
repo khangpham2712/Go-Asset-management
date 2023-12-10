@@ -126,9 +126,9 @@ const AddAsset = (props: any) => {
               onChange={onGenderChange}
               allowClear
             >
-              <Option value="1">Information Technology</Option>
-              <Option value="2">Human Resources</Option>
-              <Option value="3">Finance</Option>
+              <Option data-testid="department_opt" value="1">Information Technology</Option>
+              <Option data-testid="department_opt" value="2">Human Resources</Option>
+              <Option data-testid="department_opt" value="3">Finance</Option>
             </Select>
           </Form.Item>
           <Form.Item name="type" label="Type" rules={[{ required: true }]}>

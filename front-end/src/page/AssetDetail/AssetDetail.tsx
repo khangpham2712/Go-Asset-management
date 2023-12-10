@@ -59,7 +59,9 @@ const AssestDetail = (props: any) => {
 
         // console.log(departments)
       })
-      .catch(err => console.log('Theres some errors', err))
+      .catch(err => {
+        // console.log('Theres some errors', err)
+      })
     }
 
     getDepartments()
@@ -96,7 +98,9 @@ const AssestDetail = (props: any) => {
     .then(response => {
       setData(body)
     })
-    .catch((err) => {console.log('Theres some error on calling api: ', err)})
+    .catch((err) => {
+      // console.log('Theres some error on calling api: ', err)
+    })
   }
 
  
