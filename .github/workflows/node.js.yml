@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "asset_detail" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "asset_detail" ]
 
 jobs:
   build_and_test:
@@ -24,8 +24,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Install package
-      run: npm ci
+      run: npm i
     - name: Run and build project
-      run: npm run build --if-present
+      run: npm run build
     - name: Run test 
       run: npm test
