@@ -34,7 +34,7 @@ const ViewAsset = () => {
     axios.get(url).then((response: { data: DepartmentDataType[] }) => {
       setDepartments(response.data);
     }).catch((error: any) => {
-      alert(error);
+      // alert(error);
     });
   }, [department]);
 
@@ -91,7 +91,7 @@ const ViewAsset = () => {
                       id: item.Id,
                     }))}
                 />
-                <Button id="btn-add-asset" type="primary" className='Viewasset--button' onClick={handleClick}>Add asset <PlusOutlined /></Button>
+                <Button data-testid="btn-add-asset" type="primary" className='Viewasset--button' onClick={handleClick}>Add asset <PlusOutlined /></Button>
                 {isModalOpen && <AddAsset setIsModalOpen={setIsModalOpen}/>}
             </div>
             <AssetList departmentId={department.id} departmentName={department.name} />

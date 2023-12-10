@@ -108,6 +108,7 @@ const AddAsset = (props: any) => {
         onCancel={handleCancel}
         width={700}
         className="my-modal-header"
+        data-testid="add-asset-modal"
       >
         <Form
           {...layout}
