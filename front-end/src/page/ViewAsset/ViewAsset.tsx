@@ -15,35 +15,35 @@ type DepartmentDataType = {
 
 const ViewAsset = () => {
   const role = localStorage.getItem("role");
-  const intialDepartmentId = localStorage.getItem("id");
-  const intialDepartmentName = localStorage.getItem("name");
+  const intialemployeeId = localStorage.getItem("id");
+  const intialemployeeName = localStorage.getItem("name");
 
   // const [Department, setDepartment] = useState<string>((intialDepartment === null) ? 'vi' : intialDepartment);
 
   const [departments, setDepartments] = useState<DepartmentDataType[]>([]);
   const [departmentOption, setDepartmentOption] = useState<{ label: string; value: string, id: number }[]>([]);
   const [department, setDepartment] = useState<{id: number, name: string}>({id: 0, name: ""});
-  // const [department, setDepartment] = useState<{id: number, name: string}>((intialDepartmentId === null && intialDepartmentName === null) ? {id: 0, name: ""} : {id: parseInt(intialDepartmentId), name: intialDepartmentName});
+  // const [department, setDepartment] = useState<{id: number, name: string}>((intialemployeeId === null && intialemployeeName === null) ? {id: 0, name: ""} : {id: parseInt(intialemployeeId), name: intialemployeeName});
   const url = 'http://localhost:8080/api/departments/';
   // useEffect(() =>
   // {
   //     localStorage.setItem('MYAPP_DEPARTMENT', Department);
   // }, [Department]);
   useEffect(() => {
-    axios
-      .get(url)
-      .then((response: { data: DepartmentDataType[] }) => {
-        setDepartments(response.data);
-      })
-      .catch((error: any) => {
-        alert(error);
-      });
+    // axios
+    //   .get(url)
+    //   .then((response: { data: DepartmentDataType[] }) => {
+    //     setDepartments(response.data);
+    //   })
+    //   .catch((error: any) => {
+    //     alert(error);
+    //   });
   }, [department]);
 
   useEffect(() => {
     if (role === "1") {
       const intialDepartment = departments.find(
-        (items) => items.Id.toString() === intialDepartmentId
+        (items) => items.Id.toString() === intialemployeeId
       );
       // console.log(intialDepartment)
       if (intialDepartment)
@@ -101,7 +101,7 @@ const ViewAsset = () => {
                 <Button type="primary" className='Viewasset--button' onClick={handleClick}>Add asset <PlusOutlined /></Button>
                 {isModalOpen && <AddAsset setIsModalOpen={setIsModalOpen}/>}
             </div>
-            <AssetList departmentId={department.id} departmentName={department.name} />
+            <AssetList employeeId={department.id} employeeName={department.name} />
             </div>
         </div>
     );

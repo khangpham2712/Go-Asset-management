@@ -56,16 +56,16 @@ const AssestDetail = (props: any) => {
 
   useEffect(() => {
     const getDepartments = async () => {
-      const response = await axios.get(
-        `http://localhost:8080/api/departments/`
-      ).then(response => {
-        setDepartments(response.data)
+      // const response = await axios.get(
+      //   `http://localhost:8080/api/departments/`
+      // ).then(response => {
+      //   setDepartments(response.data)
 
-        // console.log(departments)
-      })
-      .catch(err => {
-        // console.log('Theres some errors', err)
-      })
+      //   // console.log(departments)
+      // })
+      // .catch(err => {
+      //   // console.log('Theres some errors', err)
+      // })
     }
 
     getDepartments()
@@ -211,7 +211,7 @@ const AssestDetail = (props: any) => {
                 :
                 <div>{props.departmentName}</div>
               } */}
-              <div data-testid="employeeName">{props.employeeName}</div>
+              <div data-testid="employeeName">{props.employeeName || "Employee Name"}</div>
 
               {/* <div>$20</div> */}
               {

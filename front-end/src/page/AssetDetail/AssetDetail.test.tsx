@@ -27,13 +27,13 @@ afterEach(() => {
 describe("Asset-detail-test", () => {
   test("should display asset's detail assigned to an employee when clicking view button (manager role)", async () => {
     // 1. Set userId (employeeId) = 1, employeeName = "Pham Khang". Using manager role to asset list page
-    let departmentId = 1;
-    let departmentName = "Pham Khang";
+    let employeeId = 1;
+    let employeeName = "Pham Khang";
     localStorage.setItem("role", "0");
 
     // 2. User click view button of first asset
     render(
-      <AssetList departmentId={departmentId} departmentName={departmentName} />
+      <AssetList employeeId={employeeId} employeeName={employeeName} />
     );
 
     const viewbtn = await screen.findAllByTestId("view-asset-detail");
@@ -81,15 +81,15 @@ describe("Asset-detail-test", () => {
 
   it("should remove modal from document when user clicks close button", async () => {
     // 1. Set userId (employeeId) = 1, employeeName = "Pham Khang". Using manager role to asset list page
-    let departmentId = 1;
-    let departmentName = "Pham Khang";
+    let employeeId = 1;
+    let employeeName = "Pham Khang";
     localStorage.setItem("role", "0");
 
     // 2. User clicks view button of first asset
     render(
       <AssetList
-        departmentId={departmentId}
-        departmentName={departmentName}
+        employeeId={employeeId}
+        employeeName={employeeName}
       />
     );
 

@@ -11,7 +11,7 @@ type DataType = {
   name: string;
   category: string;
   status: string;
-  departmentName: string;
+  employeeName: string;
   createdDay: string;
   updatedDay: string;
   actions: ReactNode;
@@ -50,8 +50,8 @@ const columns: ColumnsType<DataType> = [
   },
   {
     title: "Department Name",
-    dataIndex: "departmentName",
-    key: "departmentName",
+    dataIndex: "employeeName",
+    key: "employeeName",
   },
   {
     title: "Created Day",
@@ -70,7 +70,7 @@ const columns: ColumnsType<DataType> = [
   },
 ];
 
-const AssetList = (props: { departmentId: number; departmentName: string }) => {
+const AssetList = (props: { employeeId: number; employeeName: string }) => {
   const [data, setData] = useState<AssetDataType[]>([]);
   const [showItems, setShowItems] = useState<DataType[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -100,7 +100,7 @@ const AssetList = (props: { departmentId: number; departmentName: string }) => {
   const role = localStorage.getItem("role");
 
   const url =
-    "http://localhost:8080/api/assets/?department_id=" + props.departmentId;
+    "http://localhost:8080/api/assets/?department_id=" + props.employeeId;
 
   useEffect(() => {
     axios
@@ -111,7 +111,7 @@ const AssetList = (props: { departmentId: number; departmentName: string }) => {
       .catch((error: any) => {
         alert(error);
       });
-  }, [props.departmentId]);
+  }, [props.employeeId]);
 
   useEffect(() => {
     setShowItems([]);
@@ -124,7 +124,7 @@ const AssetList = (props: { departmentId: number; departmentName: string }) => {
           name: item.name,
           category: item.type,
           status: item.status,
-          departmentName: props.departmentName,
+          employeeName: props.employeeName,
           createdDay: item.name,
           updatedDay: item.updated_at,
           actions: (
@@ -169,7 +169,7 @@ const AssetList = (props: { departmentId: number; departmentName: string }) => {
       {isModalOpen && (
         <AssetDetail
           assetId={assetId}
-          employeeName={props.departmentName}
+          employeeName={props.employeeName}
           setIsModalOpen={setIsModalOpen}
         />
       )}
