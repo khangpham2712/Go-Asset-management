@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Button, Modal } from "antd";
-import axios from "axios";
+import { Modal } from "antd";
 import "../AssetDetail/AssetDetail.css";
+import axios from "axios";
 
 const AssestDetail = (props: any) => {
   const [data, setData] = useState({
@@ -26,16 +26,12 @@ const AssestDetail = (props: any) => {
       console.log(response.data)
     })
     .catch((error: any) => {
-      alert(error);
+      alert(error.response.data.error);
     });
   };
   useEffect(() => {
     loadData();
   }, [props.assetId]);
-
-  const handleOk = () => {
-    props.setIsModalOpen(false);
-  };
 
   const handleCancel = () => {
     props.setIsModalOpen(false);
@@ -46,11 +42,11 @@ const AssestDetail = (props: any) => {
       <Modal
         title={data["name"]}
         open={true}
-        onOk={handleOk}
         onCancel={handleCancel}
         width={780}
         className="my-modal"
         footer={null}
+        data-testid="asset-detai-modal"
       >
         <div className="modal-sub-title">{data.id}</div>
         <div className="assest-wrapper">
@@ -63,10 +59,10 @@ const AssestDetail = (props: any) => {
             </div>
 
             <div className="subcontainer-content">
-              <div>{data.type}</div>
+              <div data-testid="category">{data.type}</div>
               {/* <div>{data.status}</div> */}
-              <div>{data.created_at.toString().slice(0, 19).replace("T", " ")}</div>
-              <div>{data.updated_at.toString().slice(0, 19).replace("T", " ")}</div>
+              <div data-testid="created_at">{data.created_at.toString().slice(0, 19).replace("T", " ")}</div>
+              <div data-testid="updated_at">{data.updated_at.toString().slice(0, 19).replace("T", " ")}</div>
             </div>
           </div>
           <div className="assest-container"  style={{flexShrink: 1}}>
@@ -78,8 +74,8 @@ const AssestDetail = (props: any) => {
 
             <div className="subcontainer-content">
               {/* <div>{props.departmentName}</div> */}
-              <div>{data.status}</div>
-              <div>{props.employeeName}</div>
+              <div data-testid="status">{data.status}</div>
+              <div data-testid="employeeName">{props.employeeName}</div>
             </div>
           </div>
         </div>
@@ -89,7 +85,7 @@ const AssestDetail = (props: any) => {
             <div>Description</div>
           </div>
           <div className="subcontainer-content">
-            <div>{data.description}</div>
+            <div data-testid="description">{data.description}</div>
           </div>
         </div>
 
@@ -98,7 +94,7 @@ const AssestDetail = (props: any) => {
             <div>Status Note</div>
           </div>
           <div className="subcontainer-content">
-            <div>{data.status_note}</div>
+            <div data-testid="status_note">{data.status_note}</div>
           </div>
         </div>
       </Modal>

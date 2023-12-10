@@ -1,10 +1,10 @@
 import { Select, Button, Popconfirm, message } from "antd";
 import { Space, Table, Tag } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import axios from "axios";
 import { ReactNode, useEffect, useState } from "react";
 import "./ViewAsset.css";
 import AssetDetail from "../AssetDetail/AssetDetail";
+import axios from "axios";
 
 type DataType = {
   assetId: number;
@@ -93,19 +93,19 @@ const AssetList = (props: { departmentId: number; departmentName: string }) => {
         message.success('Asset was successfully deleted');
       })
       .catch((error: any) => {
-        alert(error);
+        alert(error.response.data.error);
       });
   };
 
   const role = localStorage.getItem("role");
 
   const url =
-    "http://localhost:8080/api/assets/?employee_id=" + props.departmentId;
+    "http://localhost:8080/api/assets/?department_id=" + props.departmentId;
 
   useEffect(() => {
     axios
       .get(url)
-      .then((response: { data: AssetDataType[] }) => {
+      .then((response) => {
         setData(response.data);
       })
       .catch((error: any) => {
@@ -129,7 +129,7 @@ const AssetList = (props: { departmentId: number; departmentName: string }) => {
           updatedDay: item.updated_at,
           actions: (
             <div className="more-actions">
-              <Button type="primary" onClick={() => handleClick(item.id)} id="view-asset-detail">
+              <Button type="primary" onClick={() => handleClick(item.id)} data-testid="view-asset-detail">
                 View
               </Button>
               <Popconfirm
@@ -138,6 +138,7 @@ const AssetList = (props: { departmentId: number; departmentName: string }) => {
                 onConfirm={() => deleteData(item.id)}
                 okText="Yes"
                 cancelText="No"
+                data-testid="pop-confirm-delete"
               >
                 <Button
                   className={`DeleteButton__${
@@ -146,7 +147,7 @@ const AssetList = (props: { departmentId: number; departmentName: string }) => {
                   type="primary"
                   danger
                   // onClick={() => deleteData(item.id)}
-                  id="delete-asset"
+                  data-testid="delete-asset"
                 >
                   Delete
                 </Button>

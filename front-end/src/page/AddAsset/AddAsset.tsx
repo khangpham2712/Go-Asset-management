@@ -100,7 +100,7 @@ const AddAsset = (props: any) => {
 
 
   return (
-    <>
+    <div id="add-asset-layout">
       <Modal
         title={"Add new asset"}
         open={true}
@@ -170,7 +170,7 @@ const AddAsset = (props: any) => {
           </Form.Item>
         </Form>
       </Modal>
-    </>
+    </div>
   );
 };
 export default AddAsset;

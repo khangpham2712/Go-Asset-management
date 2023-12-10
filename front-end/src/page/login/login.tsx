@@ -13,7 +13,7 @@ const Login = () => {
   //   // (res.status === 200) ? window.location.href = "../" : setLoginErr(true);
   //   // console.log('Success:', info);
   // };
-  const nav: any = useNavigate()
+  // const nav: any = useNavigate()
 
   // if (loginState) {
   //   nav('/home')
@@ -87,7 +87,7 @@ const Login = () => {
             },
           ]}
         >
-          <Input />
+          <Input data-testid="username"/>
         </Form.Item>
 
         <Form.Item
@@ -100,7 +100,7 @@ const Login = () => {
             },
           ]}
         >
-          <Input.Password />
+          <Input.Password data-testid="password"/>
         </Form.Item>
 
         <Form.Item
@@ -120,7 +120,7 @@ const Login = () => {
             span: 16,
           }}
         >
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" data-testid="login-btn">
             Submit
           </Button>
 

@@ -1,5 +1,4 @@
 import { Select, Button } from 'antd';
-import axios from 'axios';
 import { ReactNode, useEffect, useState } from 'react';
 import './ViewAsset.css';
 import AssetList from './AssetList';
@@ -7,6 +6,7 @@ import internal from 'stream';
 import AddAsset from '../AddAsset/AddAsset';
 import { PlusOutlined } from '@ant-design/icons';
 import {Header } from '../../components/Header/Header';
+import axios from 'axios';
 
 type DepartmentDataType = {
   Id: number;
@@ -23,7 +23,7 @@ const ViewAsset = () => {
 
   const [departments, setDepartments] = useState<DepartmentDataType[]>([]);
   const [departmentOption, setDepartmentOption] = useState<{ label: string; value: string, id: number }[]>([]);
-  const [department, setDepartment] = useState<{id: number, name: string}>({id: 0, name: ""});
+  const [department, setDepartment] = useState<{id: number, name: string}>({id: 1, name: ""});
   // const [department, setDepartment] = useState<{id: number, name: string}>((intialDepartmentId === null && intialDepartmentName === null) ? {id: 0, name: ""} : {id: parseInt(intialDepartmentId), name: intialDepartmentName});
   const url = 'http://localhost:8080/api/departments/';
   // useEffect(() =>
