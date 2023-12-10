@@ -15,15 +15,14 @@ type DepartmentDataType = {
 
 const ViewAsset = () => {
   const role = localStorage.getItem("role");
-  const intialDepartmentId = localStorage.getItem("MYAPP_DEPARTMENTID");
-  const intialDepartmentName = localStorage.getItem("MYAPP_DEPARTMENTNAME");
+  const intialDepartmentId = localStorage.getItem("id");
+  const intialDepartmentName = localStorage.getItem("name");
 
   // const [Department, setDepartment] = useState<string>((intialDepartment === null) ? 'vi' : intialDepartment);
 
-
   const [departments, setDepartments] = useState<DepartmentDataType[]>([]);
   const [departmentOption, setDepartmentOption] = useState<{ label: string; value: string, id: number }[]>([]);
-  const [department, setDepartment] = useState<{id: number, name: string}>({id: 1, name: ""});
+  const [department, setDepartment] = useState<{id: number, name: string}>({id: 0, name: ""});
   // const [department, setDepartment] = useState<{id: number, name: string}>((intialDepartmentId === null && intialDepartmentName === null) ? {id: 0, name: ""} : {id: parseInt(intialDepartmentId), name: intialDepartmentName});
   const url = 'http://localhost:8080/api/departments/';
   // useEffect(() =>
@@ -46,6 +45,7 @@ const ViewAsset = () => {
       const intialDepartment = departments.find(
         (items) => items.Id.toString() === intialDepartmentId
       );
+      // console.log(intialDepartment)
       if (intialDepartment)
         setDepartment({ id: intialDepartment.Id, name: intialDepartment.Name });
     } else if (role === "0") {

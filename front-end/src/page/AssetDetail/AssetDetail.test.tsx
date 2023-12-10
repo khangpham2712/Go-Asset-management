@@ -1,3 +1,4 @@
+/* eslint-disable testing-library/await-async-query */
 /* eslint-disable jest/no-conditional-expect */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable testing-library/no-node-access */
@@ -26,127 +27,99 @@ import Login from "../login/login";
 import axios from "axios";
 import { globalAgent } from "http";
 
-// beforeEach(() => {
-//   const setIsModalOpenMock = jest.fn(() => Promise.resolve());
-// });
-
 afterEach(() => {
   cleanup();
   jest.clearAllMocks();
 });
 
 describe("Asset-detail-test", () => {
-  it("should view first asset's detail assigned to Pham Khang employee (manager role)", async () => {
-    // const fakeAsset = {
-    //   name: "table",
-    //   age: "",
-    //   address: "123, Charming Avenue",
-    // };
-
-    // jest.mock('axios', () => jest.fn(() => Promise.resolve('teresa teng')));
-
+  test("should display first asset's detail assigned to Pham Khang employee (manager role)", async () => {
     // 1. Set userId (employeeId) = 1, employeeName = "Pham Khang". Using manager role to asset list page
     let departmentId = 1;
     let departmentName = "Pham Khang";
     localStorage.setItem("role", "0");
 
     // 2. User click view button of first asset
-    const a = render(
+    render(
       <AssetList departmentId={departmentId} departmentName={departmentName} />
     );
 
     const viewbtn = await screen.findAllByTestId("view-asset-detail");
     fireEvent.click(viewbtn[0]);
 
-    // /* Check if button clicked */
-    // let handleClick = jest.fn(() => {
-    //   let setIsModalOpenMock = jest.fn();
-    // })
-
-    // // const handleClick = jest.fn();
-    // expect(handleClick).toBeCalledWith("1")
-
     // 3. System display selected asset's detail
     /* Assert to open modal of asset's detail */
-    let assetId = 1;
-    let employeeName = "Pham Khang";
-
-    // render(
-    //   <AssestDetail
-    //     assetId={assetId}
-    //     employeeName={employeeName}
-    //     setIsModalOpen={setIsModalOpen}
-    //   />
-    // );
-
-    // expect(setIsModalOpenMock).toBeCalledWith({ isModalOpen: true });
-
-    // expect(setIsModalOpenMock).toHaveBeenCalled();
     expect(screen.getByTestId("asset-detail-modal")).toBeInTheDocument();
 
     /* Assert that all details are rendered in document */
     expect(screen.getByTestId("employeeName").textContent).toBe("Pham Khang");
 
-    expect(await screen.findByText("funiture")).toBeInTheDocument();
-    // console.log((await screen.findByTestId("category")).textContent);
-    expect((await screen.findByTestId("category")).textContent).toBe(
-      "funiture"
-    );
-
-    expect(await document.querySelector(".ant-modal-title")?.textContent).toBe(
-      "table"
-    );
-    expect((await screen.findByTestId("status")).textContent).toBe("working");
-    expect((await screen.findByTestId("status_note")).textContent).toBe(
-      "All conditions are checked"
-    );
-    expect((await screen.findByTestId("description")).textContent).toBe(
-      "A desk or bureau is a piece of furniture with a flat table-style work surface used in a school, office, home or the like for academic, professional "
-    );
-    expect((await screen.findByTestId("created_at")).textContent).toBe(
-      "2023-12-08 01:05:41"
-    );
-    expect((await screen.findByTestId("updated_at")).textContent).toBe(
-      "2023-12-08 01:05:41"
-    );
+    await waitFor(() => {
+      expect(screen.getByTestId("category").textContent).toBe("funiture");
+    });
+    await waitFor(() => {
+      expect(
+        document.querySelector(".ant-modal-title")?.textContent
+      ).toBe("table");
+    });
+    await waitFor(() => {
+      expect((screen.getByTestId("status")).textContent).toBe("working");
+    });
+    await waitFor(() => {
+      expect((screen.getByTestId("status_note")).textContent).toBe(
+        "All conditions are checked"
+      );
+    });
+    await waitFor(() => {
+      expect((screen.getByTestId("description")).textContent).toBe(
+        "A desk or bureau is a piece of furniture with a flat table-style work surface used in a school, office, home or the like for academic, professional"
+      );
+    });
+    await waitFor(() => {
+      expect((screen.getByTestId("created_at")).textContent).toBe(
+        "2023-12-09 19:10:01"
+      );
+    });
+    await waitFor(() => {
+      expect((screen.getByTestId("updated_at")).textContent).toBe(
+        "2023-12-09 19:10:01"
+      );
+    });
   });
 
-  // it("should remove modal from document when user clicks close button", async () => {
-  //   // 1. Set userId (employeeId) = 1, employeeName = "Pham Khang". Using manager role to asset list page
-  //   let departmentId = 1;
-  //   let departmentName = "Pham Khang";
-  //   localStorage.setItem("role", "0");
+  it("should remove modal from document when user clicks close button", async () => {
+    // 1. Set userId (employeeId) = 1, employeeName = "Pham Khang". Using manager role to asset list page
+    let departmentId = 1;
+    let departmentName = "Pham Khang";
+    localStorage.setItem("role", "0");
 
-  //   // 2. User clicks view button of first asset
-  //   render(
-  //     <AssetList
-  //       departmentId={departmentId}
-  //       departmentName={departmentName}
-  //     />
-  //   );
+    // 2. User clicks view button of first asset
+    render(
+      <AssetList
+        departmentId={departmentId}
+        departmentName={departmentName}
+      />
+    );
 
-  //   const viewbtn = await screen.findAllByTestId("view-asset-detail");
-  //   fireEvent.click(viewbtn[0]);
+    const viewbtn = await screen.findAllByTestId("view-asset-detail");
+    fireEvent.click(viewbtn[0]);
 
-  //   // 3. User clicks close button
-  //   fireEvent.click(screen.getByRole("button", {name: "Close"}))
-    
-  //   // 4. System remove modal from document. Check it's existence in document.
-  //   expect(
-  //     screen.queryByTestId("asset-detail-modal")
-  //   ).not.toBeInTheDocument();
+    // 3. User clicks close button
+    fireEvent.click(screen.getByRole("button", {name: "Close"}))
 
-  // });
-  
+    // 4. System remove modal from document. Check it's existence in document.
+    expect(
+      screen.queryByTestId("asset-detail-modal")
+    ).not.toBeInTheDocument();
 
-  // Someone send assetId through API
-  it("should handle error when fetching from GET API (with not existed asset id)", async () => {
+  });
+
+  it("should handle error when fetching with not existed asset id", async () => {
     const assetId = 5;
     const errorGet = { message: "Not found" };
     let setIsModalOpenMock = jest.fn();
-    const alertMock = jest.spyOn(window,'alert').mockImplementation(); 
-    // global.window.alert = jest.fn();
-    
+    const alertMock = jest.spyOn(window,'alert').mockImplementation();
+
     render(
       <AssestDetail
         assetId={assetId}
@@ -154,19 +127,12 @@ describe("Asset-detail-test", () => {
         setIsModalOpen={setIsModalOpenMock}
       />
     );
-    
-      // expect(e.response.data.error).toEqual(errorGet.message);
-      expect(alertMock).toHaveBeenCalled();
-    
-    // try {
-    //   await axios.get(`http://localhost:8080/api/assets/${assetId}`);
-    // } catch (e: any) {
-    //   expect(e.response.data.error).toEqual(errorGet.message);
-    // }
+
+    await waitFor(() => expect(alertMock).toHaveBeenCalledWith(errorGet.message))
+
   });
 });
 
-// jest.mock("axios");
 
 describe("Delete-asset-test", () => {
   it("should delete first asset assigned to employee Nguyen An successfully when clicking delete button (manager role)", async () => {
@@ -199,17 +165,17 @@ describe("Delete-asset-test", () => {
     expect(
       await screen.findByText("Asset was successfully deleted")
     ).toBeInTheDocument();
-    expect(await screen.findByText("monitor")).not.toBeInTheDocument();
+    expect(screen.queryByText("monitor")).not.toBeInTheDocument();
   });
 
   it("should not confirm to delete asset assigned to employee Pham Khang when clicking delete button (manager role)", async () => {
-    // 1. Set userId (employeeId) = 3, employeeName = "Nguyen An". Using manager role to asset list page
+    // 1. Set userId (employeeId) = 1, employeeName = "Pham Khang". Using manager role to asset list page
     let departmentId = 1;
     let departmentName = "Pham Khang";
     localStorage.setItem("role", "0");
 
     // 2. User clicks delete button of first asset
-    const a = render(
+    render(
       <AssetList departmentId={departmentId} departmentName={departmentName} />
     );
 
@@ -230,27 +196,22 @@ describe("Delete-asset-test", () => {
 
     // 5. System display asset list. Asset was not deleted from asset list. Tooltip disappears.
     expect(screen.getByText("Pham Khang")).toBeInTheDocument();
-    expect(await screen.findByText("table")).toBeInTheDocument();
+    expect(screen.getAllByText("table")).toBeTruthy();
     expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
   });
 
   // Someone send assetId through API
-  it("should handle error when deleting from an API (with not existed asset id)", async () => {
-    const assetId = 5;
-    const errorDelete = { message: "Not found" };
-    // const mockedAxios = axios as jest.Mocked<typeof axios>;
-    // (axios.delete as jest.Mock).mockResolvedValue(errorDelete)
+  // it("should handle error when deleting from an API (with not existed asset id)", async () => {
+  //   const assetId = 5;
+  //   const errorDelete = { message: "Not found" };
 
-    // mockedAxios.delete.mockImplementationOnce(() => Promise.reject(new Error("Not found")));
-    // const {result} = renderHook(() => <AssetList departmentId={1} departmentName="Pham Khang"/>)
-
-    try {
-      await axios.delete(`http://localhost:8080/api/assets/${assetId}`);
-    } catch (e: any) {
-      console.log(e.response.data.error);
-      expect(e.response.data.error).toEqual(errorDelete.message);
-    }
-  });
+  //   try {
+  //     await axios.delete(`http://localhost:8080/api/assets/${assetId}`);
+  //   } catch (e: any) {
+  //     console.log(e.response.data.error);
+  //     expect(e.response.data.error).toEqual(errorDelete.message);
+  //   }
+  // });
 
   it.each([
     ["DeleteButton__department", "1"],

@@ -23,7 +23,7 @@ const AssestDetail = (props: any) => {
     ) 
     .then((response) => {
       setData(response.data);
-      console.log(response.data)
+      // console.log(response.data)
     })
     .catch((error: any) => {
       alert(error.response.data.error);
@@ -46,7 +46,7 @@ const AssestDetail = (props: any) => {
         width={780}
         className="my-modal"
         footer={null}
-        data-testid="asset-detai-modal"
+        data-testid="asset-detail-modal"
       >
         <div className="modal-sub-title">{data.id}</div>
         <div className="assest-wrapper">

@@ -41,6 +41,7 @@ const Login = () => {
         console.log('Login successful. User data:', userData);
         localStorage.setItem('role', userData.Role);
         localStorage.setItem('id', userData.Id);
+        localStorage.setItem('name', userData.Name);
         window.location.href = "../view-asset"
       } else {
         // Login failed, handle the error response
