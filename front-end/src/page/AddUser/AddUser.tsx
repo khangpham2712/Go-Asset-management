@@ -35,6 +35,7 @@ const AddUser = () => {
         return;
       }
       else if(newUsername !== "" && newPassword !== "" && newTelephone !== "" && newDname !== ""){
+        // Edit link API here
         const response = await fetch('http://localhost:3000/courses', {
             method: 'POST',
             headers: {

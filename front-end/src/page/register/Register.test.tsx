@@ -22,7 +22,7 @@ import Register from "./Register";
 import { MemoryRouter } from "react-router-dom";
 import userEvent from '@testing-library/user-event';
 
-describe('Login - Decision Table Testing', () => {
+describe('Register - Userflow Testing', () => {
     test('Test 1: User register successfully', async () => {
         const { findByTestId } = render(
             <MemoryRouter>
