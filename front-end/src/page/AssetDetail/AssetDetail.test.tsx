@@ -25,7 +25,7 @@ afterEach(() => {
 });
 
 describe("Asset-detail-test", () => {
-  test("should display first asset's detail assigned to Pham Khang employee (manager role)", async () => {
+  test("should display asset's detail assigned to an employee when clicking view button (manager role)", async () => {
     // 1. Set userId (employeeId) = 1, employeeName = "Pham Khang". Using manager role to asset list page
     let departmentId = 1;
     let departmentName = "Pham Khang";
@@ -127,7 +127,7 @@ describe("Asset-detail-test", () => {
 
 
 describe("Delete-asset-test", () => {
-  it("should delete first asset assigned to employee Nguyen An successfully when clicking delete button (manager role)", async () => {
+  it("should delete asset assigned to an employee successfully when clicking 'yes' with delete button (manager role)", async () => {
     // 1. Set userId (employeeId) = 3, employeeName = "Nguyen An". Using manager role to asset list page
     let departmentId = 3;
     let departmentName = "Nguyen An";
@@ -160,7 +160,7 @@ describe("Delete-asset-test", () => {
     expect(screen.queryByText("monitor")).not.toBeInTheDocument();
   });
 
-  it("should not confirm to delete asset assigned to employee Pham Khang when clicking delete button (manager role)", async () => {
+  it("should not delete asset assigned to an employee when clicking 'no' with delete button (manager role)", async () => {
     // 1. Set userId (employeeId) = 1, employeeName = "Pham Khang". Using manager role to asset list page
     let departmentId = 1;
     let departmentName = "Pham Khang";
@@ -191,19 +191,6 @@ describe("Delete-asset-test", () => {
     expect(screen.getAllByText("table")).toBeTruthy();
     expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
   });
-
-  // Someone send assetId through API
-  // it("should handle error when deleting from an API (with not existed asset id)", async () => {
-  //   const assetId = 5;
-  //   const errorDelete = { message: "Not found" };
-
-  //   try {
-  //     await axios.delete(`http://localhost:8080/api/assets/${assetId}`);
-  //   } catch (e: any) {
-  //     console.log(e.response.data.error);
-  //     expect(e.response.data.error).toEqual(errorDelete.message);
-  //   }
-  // });
 
   it.each([
     ["DeleteButton__department", "1"],
