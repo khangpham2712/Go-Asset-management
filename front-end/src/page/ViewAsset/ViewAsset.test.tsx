@@ -24,7 +24,7 @@ import {
     jest.clearAllMocks();
   });
 
-  jest.mock('axios');
+//   jest.mock('axios');
 
   describe('ViewAsset component',  () => {
     const mockData = [
