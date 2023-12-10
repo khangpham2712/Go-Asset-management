@@ -81,7 +81,7 @@ const AssetList = (props: {departmentId: number, departmentName: string}) => {
     axios.get(url).then((response: { data: AssetDataType[] }) => {
       setData(response.data);
     }).catch((error: any) => {
-      alert(error);
+      // alert(error);
     });
   }, [props.departmentId, deleted]);
 
